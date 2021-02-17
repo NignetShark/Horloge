@@ -21,16 +21,17 @@ typedef enum {
 class DialColoration : public ColorationService {
 private:
     /*** GENERIC FUNCTIONS ***/
-
     void unicolor(color_t color);
+    void unicolors(color_t *colors);
+    void movingRainbow(float *hueOffsets, uint16_t delay_ms, float increment = 1);
 
 public:
     DialColoration(DialMixer &mixer);
 
     void run() override;
 
-    /*** CUSTOM FUNCTIONS ***/
     void mode(size_t index) override;
+
 
 
 };

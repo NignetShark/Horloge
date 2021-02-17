@@ -27,6 +27,8 @@ namespace led_color {
     const color_t WHITE {.ws2811 = 0x00FFFFFF};
 
     void LERP(color_t target[], const color_t from[], const color_t to[], float t, uint8_t end, uint8_t start = 0);
+
+    color_t from_HSV(float h, float s, float v);
 }
 
 #endif //HORLOGE_LEDCOLOR_HPP
