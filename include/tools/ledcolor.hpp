@@ -14,14 +14,17 @@ typedef union {
         uint8_t green;
         uint8_t red;
         uint8_t white;
-    };
+    } rgb;
     ws2811_led_t ws2811;
 } color_t;
 
-const color_t COLOR_BLACK {.ws2811 = 0};
-const color_t COLOR_WHITE {.ws2811 = 0x00FFFFFF};
+
 
 namespace led_color {
+
+    const color_t NIGHT {.rgb = {0, 0, 1, 0}};
+    const color_t BLACK {.ws2811 = 0};
+    const color_t WHITE {.ws2811 = 0x00FFFFFF};
 
     void LERP(color_t target[], const color_t from[], const color_t to[], float t, uint8_t end, uint8_t start = 0);
 }

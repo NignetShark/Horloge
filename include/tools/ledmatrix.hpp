@@ -7,10 +7,7 @@
 
 #include <cstdint>
 #include "tools/ledcolor.hpp"
-
-#define DIAL_COUNT              6                          // 6 dials
-#define DIGITS_COUNT            10                         // 10 digits (from 0 to 9)
-#define LED_COUNT               (DIAL_COUNT * DIGITS_COUNT)
+#include "tools/settings.hpp"
 
 
 /**
@@ -32,6 +29,7 @@ public:
     void digits(const uint8_t digits[DIAL_COUNT], const color_t colors[DIAL_COUNT]);
     void matrixLERP(LedMatrix& result, LedMatrix& final, float t);
     color_t get(uint8_t digit, uint8_t dial) const;
+
 };
 
 #endif //HORLOGE_LEDMATRIX_HPP

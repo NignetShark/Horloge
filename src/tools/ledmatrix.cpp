@@ -28,7 +28,7 @@ void setup_lookup_indexes() {
 }
 
 LedMatrix::LedMatrix(bool clear) : matrix() {
-    if(clear) all(COLOR_BLACK); // Clear values in matrix.
+    if(clear) all(led_color::BLACK); // Clear values in matrix.
 }
 
 

@@ -11,6 +11,7 @@
 #include "ledmatrix.hpp"
 
 class DebugPrint {
+private:
 public:
     static void print(std::string m, color_t c);
     static void print(LedMatrix& m);
