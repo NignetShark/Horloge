@@ -10,12 +10,22 @@ SafeArray<T, size>::SafeArray() {
 }
 
 template<class T, int size>
-void SafeArray<T, size>::end_get() {
+void SafeArray<T, size>::unlock() {
     mutex.unlock();
 }
 
 template<class T, int size>
-T* SafeArray<T, size>::start_get() {
+T* SafeArray<T, size>::unsafe_get() {
+    return array;
+}
+
+template<class T, int size>
+T* SafeArray<T, size>::lock_get() {
     mutex.lock();
     return array;
+}
+
+template<class T, int size>
+void SafeArray<T, size>::lock() {
+    mutex.lock();
 }

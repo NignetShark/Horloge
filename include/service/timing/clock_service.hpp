@@ -11,12 +11,19 @@
 
 class ClockService : public TimingService {
 private:
+    void waitUntilNextSec();
+    bool array_equals(uint8_t* array1, uint8_t* array2, size_t size);
 
+    void reset();
 
+    void cascadeNumbersToTime(u_int16_t delay_ms);
+    void cascadeDigits(uint8_t *toDigits, unsigned int delay_ms);
 public:
     ClockService(DialMixer& mixer);
 
     void run() override;
+
+
 };
 
 

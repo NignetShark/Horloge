@@ -16,6 +16,9 @@ private:
 
 public:
     static void time2digits(uint8_t result[DIAL_COUNT], std::tm* tmps);
+    static void time2numbers(uint8_t *result, tm *tmps);
+    static void numbers2digits(uint8_t *result, uint8_t* numbers);
+    static void digits2numbers(uint8_t *result, uint8_t *digits);
 };
 
 

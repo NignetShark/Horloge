@@ -18,9 +18,11 @@ private:
 public:
     SafeArray();
 
-    T* start_get();
+    T* lock_get();
+    T *unsafe_get();
 
-    void end_get();
+    void lock();
+    void unlock();
 
 };
 

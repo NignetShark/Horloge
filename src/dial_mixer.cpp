@@ -13,8 +13,8 @@ void DialMixer::digits_ready(uint8_t *digits) {
 
     matrix.all(led_color::BLACK);
 
-    matrix.digits(digits, colors->start_get());
-    colors->end_get();
+    matrix.digits(digits, colors->lock_get());
+    colors->unlock();
 
     display.display(matrix);
 }
@@ -24,8 +24,8 @@ void DialMixer::colors_ready(color_t *colors) {
 
     matrix.all(led_color::BLACK);
 
-    matrix.digits(digits->start_get(), colors);
-    digits->end_get();
+    matrix.digits(digits->lock_get(), colors);
+    digits->unlock();
 
     display.display(matrix);
 }

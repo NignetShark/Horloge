@@ -14,12 +14,12 @@ void DialColoration::run() {
 }
 
 void DialColoration::unicolor(color_t color) {
-    color_t* target = pattern.start_get();
+    color_t* target = pattern.lock_get();
     for(uint8_t i = 0; i < DIAL_COUNT; i++) {
         target[i] = color;
     }
     mixer.colors_ready(target);
-    pattern.end_get();
+    pattern.unlock();
 }
 
 void DialColoration::mode(size_t index) {

@@ -17,6 +17,8 @@ int main() {
     dial_coloration.start();
     clock.start();
 
+    std::this_thread::sleep_for(std::chrono::seconds(15));
+
     dial_coloration.stop();
     clock.stop();
 
