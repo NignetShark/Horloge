@@ -4,12 +4,12 @@
 
 #include "service/async_service.hpp"
 
-void AsyncService::start() {
+void AsyncService::_start() {
     keepAlive = true;
-    service_thread = std::thread(&AsyncService::run, this);
+    service_thread = std::move(std::thread(&AsyncService::run, this));
 }
 
-void AsyncService::stop() {
+void AsyncService::_stop() {
     if(keepAlive) {
         keepAlive = false;
         service_thread.join();

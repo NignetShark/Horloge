@@ -10,14 +10,14 @@
 
 
 ClockService::ClockService(DialMixerInterface &mixer) : TimingService(mixer) {
-
+    reset(); // Important to prevent uninitialized values
 }
 
 void ClockService::run() {
     uint8_t* target = this->digits.unsafe_get();
 
     // Launch animation
-    reset();
+    mixer.paint();
     cascadeNumbersToTime(50);
 
     while (keepAlive) {
@@ -126,5 +126,4 @@ void ClockService::reset() {
         target[i] = 0;
     }
     digits.unlock();
-    mixer.paint();
 }

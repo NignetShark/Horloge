@@ -15,9 +15,11 @@ int main() {
 
     Manager::get().start_clock();
 
-    std::this_thread::sleep_for(std::chrono::seconds(15));
+    std::this_thread::sleep_for(std::chrono::seconds(5));
 
-    Manager::get().stop();
+    Manager::get().start_animation();
+
+    std::this_thread::sleep_for(std::chrono::seconds(5));
 
     return 0;
 }

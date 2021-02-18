@@ -17,13 +17,13 @@ void DialMixer::setup(DialColoration *coloration, TimingService *timing) {
     this->colors = coloration->getPattern();
 }
 
-void DialMixer::start() {
+void DialMixer::_start() {
     if(timing == nullptr || coloration == nullptr) throw FatalException("No setup for dual mixer");
     coloration->start();
     timing->start();
 }
 
-void DialMixer::stop() {
+void DialMixer::_stop() {
     timing->stop();
     coloration->stop();
 }

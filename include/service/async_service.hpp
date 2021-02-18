@@ -17,8 +17,8 @@ protected:
     bool keepAlive = false;
 
 public:
-    void start() override;
-    void stop() override;
+    void _start() override;
+    void _stop() override;
 
     static void wait_ms(unsigned int delay);
 };

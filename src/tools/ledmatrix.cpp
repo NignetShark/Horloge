@@ -55,7 +55,7 @@ void LedMatrix::set(const uint8_t digit, const uint8_t dial, const color_t color
 }
 
 void LedMatrix::matrixLERP(LedMatrix &result, LedMatrix &final, float t) {
-    led_color::LERP(result.matrix, this->matrix, final.matrix, t, 0, LED_COUNT);
+    led_color::LERP(result.matrix, this->matrix, final.matrix, t, LED_COUNT);
 }
 
 color_t LedMatrix::get(uint8_t digit, uint8_t dial) const {

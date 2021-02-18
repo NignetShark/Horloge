@@ -5,12 +5,19 @@
 #ifndef HORLOGE_SERVICE_HPP
 #define HORLOGE_SERVICE_HPP
 
+#include <set>
 
 class Service {
-public:
-    virtual void start() = 0;
-    virtual void stop() = 0;
+private:
+    static std::set<Service*> running;
+    virtual void _start() = 0;
+    virtual void _stop() = 0;
 
+public:
+    static void stop_all();
+
+    void start();
+    void stop();
 };
 
 

@@ -9,7 +9,7 @@
 
 void TerminalDisplay::display(LedMatrix &matrix) {
     mutex.lock();
-    std::system("clear");
+    std::cout << "\033[2J\033[1;1H";
     DebugPrint::print(matrix);
     mutex.unlock();
 }

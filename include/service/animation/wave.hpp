@@ -12,14 +12,17 @@ namespace animation {
     class Wave : public AnimationService {
     private:
         uint8_t sizes[DIAL_COUNT];
+        bool direction[DIAL_COUNT];
         color_t color;
 
-        void wave_set(LedMatrix &matrix, color_t color);
+        void wave_set(LedMatrix *matrix, color_t color);
 
     public:
         Wave(color_t color, unsigned int delay);
 
         void next_keyframe(LedMatrix *keyframe, LedMatrix *previous) override;
+
+        void first_frame(LedMatrix *keyframe) override;
 
     };
 }

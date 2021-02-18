@@ -32,8 +32,8 @@ public:
 
     void setup(DialColoration *coloration, TimingService *timing);
 
-    void start() override;
-    void stop() override;
+    void _start() override;
+    void _stop() override;
 
 
     void paint() override;

@@ -22,6 +22,8 @@ void AnimationService::run() {
 
     float t;
 
+    first_frame(prev_frame);
+
     while (keepAlive) {
         next_keyframe(next_frame, prev_frame);
 
@@ -31,6 +33,7 @@ void AnimationService::run() {
             prev_frame->matrixLERP(result, *next_frame, t);
             t += increment;
 
+            wait_ms(delay);
             display.display(result);
         }
 

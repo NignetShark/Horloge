@@ -8,6 +8,7 @@
 #include <service/coloration/dial_coloration.hpp>
 #include <service/timing/clock_service.hpp>
 #include <service/dial_mixer.hpp>
+#include <service/animation/wave.hpp>
 #include "display/display.hpp"
 
 class Manager {
@@ -20,9 +21,12 @@ private:
     DialColoration* dial_coloration;
     ClockService* clock_service;
 
+    animation::Wave* anim_wave;
+
     Service* current_service = nullptr;
 
     Manager(Display& display);
+    ~Manager();
 
 public:
     static void create(Display& display);
@@ -34,6 +38,7 @@ public:
 
     void stop();
 
+    void start_animation();
 };
 
 

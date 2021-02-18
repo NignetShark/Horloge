@@ -21,6 +21,7 @@ public:
 
     void run() override;
 
+    virtual void first_frame(LedMatrix* keyframe) = 0;
     virtual void next_keyframe(LedMatrix* keyframe, LedMatrix* previous) = 0;
 };
 

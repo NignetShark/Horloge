@@ -31,6 +31,7 @@ private:
 public:
     DialColoration(DialMixerInterface& mixer);
 
+    void reset();
 
     void run() override;
 

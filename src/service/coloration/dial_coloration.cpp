@@ -6,10 +6,11 @@
 #include "service/coloration/dial_coloration.hpp"
 
 DialColoration::DialColoration(DialMixerInterface& mixer) : ColorationService(NB_DIAL_MODE, RAINBOW), mixer(mixer) {
+    reset(); // Important to prevent uninitialized values
 }
 
 void DialColoration::run() {
-    unicolor(led_color::BLACK);
+    mixer.paint();
     this->current();
 }
 
@@ -71,5 +72,13 @@ void DialColoration::mode(size_t index) {
 
 SafeArray<color_t, DIAL_COUNT> *DialColoration::getPattern() {
     return &pattern;
+}
+
+void DialColoration::reset() {
+    color_t* target = pattern.lock_get();
+    for(unsigned int i = 0; i < DIAL_COUNT; i++) {
+        target[i] = led_color::BLACK;
+    }
+    pattern.unlock();
 }
 
