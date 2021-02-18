@@ -9,12 +9,12 @@
 
 void TerminalDisplay::display(LedMatrix &matrix) {
     mutex.lock();
-    last = &matrix;
+    matrix.copy(&last);
     std::cout << "\033[2J\033[1;1H";
     DebugPrint::print(matrix);
     mutex.unlock();
 }
 
 void TerminalDisplay::get(LedMatrix *target) {
-    last->copy(target);
+    last.copy(target);
 }

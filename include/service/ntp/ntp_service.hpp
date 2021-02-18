@@ -7,6 +7,9 @@
 
 #include "service/async_service.hpp"
 
+#define HOST_NAME "fr.pool.ntp.org"
+#define NTP_PORT 123
+
 class NTPService : public AsyncService {
 private:
     AnimationService& anim_service;
@@ -15,6 +18,14 @@ public:
 
 private:
     void run() override;
+
+    void err404(unsigned int attempt);
+
+    void success();
+
+    void chrono(uint8_t from, color_t color);
+
+    time_t getNTPTime();
 };
 
 

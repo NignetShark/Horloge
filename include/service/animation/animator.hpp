@@ -17,6 +17,7 @@ public:
     virtual bool first_frame(LedMatrix* keyframe) = 0;
     virtual bool next_keyframe(LedMatrix* keyframe, LedMatrix* previous) = 0;
 
+    void reset_index();
     void incr_index();
 };
 

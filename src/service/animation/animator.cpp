@@ -12,4 +12,8 @@ void Animator::incr_index() {
     index += 1;
 }
 
+void Animator::reset_index() {
+    index = 0;
+}
+
 

@@ -31,6 +31,7 @@ void AnimationService::run() {
     LedMatrix *prev_frame = &key_frame_2;
 
     float t;
+    animator->reset_index();
 
     if(!animator->first_frame(prev_frame)) {
         display.get(prev_frame);
