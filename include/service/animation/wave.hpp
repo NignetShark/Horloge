@@ -22,9 +22,9 @@ namespace animation {
     public:
         void setup(color_t color);
 
-        void next_keyframe(LedMatrix *keyframe, LedMatrix *previous) override;
+        bool next_keyframe(LedMatrix *keyframe, LedMatrix *previous) override;
 
-        void first_frame(LedMatrix *keyframe) override;
+        bool first_frame(LedMatrix *keyframe) override;
 
         static Wave& get();
 

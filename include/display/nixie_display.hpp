@@ -13,6 +13,7 @@ private:
 public:
     void display(LedMatrix &matrix) override;
 
+    void get(LedMatrix *target) override;
 };
 
 

@@ -26,7 +26,7 @@ namespace animation {
         }
     }
 
-    void Wave::next_keyframe(LedMatrix *keyframe, LedMatrix *previous) {
+    bool Wave::next_keyframe(LedMatrix *keyframe, LedMatrix *previous) {
         for(unsigned int dial = 0; dial < DIAL_COUNT; dial++) {
             if(direction[dial]) {
                 sizes[dial]++;
@@ -37,15 +37,16 @@ namespace animation {
             }
         }
         wave_set(keyframe, color);
+        return true;
     }
 
-    void Wave::first_frame(LedMatrix *keyframe) {
+    bool Wave::first_frame(LedMatrix *keyframe) {
         for(unsigned int dial = 0; dial < DIAL_COUNT; dial++) {
             sizes[dial] = dial;
             direction[dial] = true;
         }
         wave_set(keyframe, color);
-        //keyframe->all(color);
+        return true;
     }
 
     Wave &Wave::get() {

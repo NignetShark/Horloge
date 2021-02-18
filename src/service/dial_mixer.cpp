@@ -18,11 +18,11 @@ void DialMixer::setup(DialColoration *coloration, DigitsService *timing) {
 void DialMixer::_start() {
     if(digit_service == nullptr || coloration == nullptr) throw FatalException("No setup for dual mixer");
     coloration->start();
-    digit_service->start();
+    digit_service->try_start();
 }
 
 void DialMixer::_stop() {
-    digit_service->stop();
+    digit_service->try_stop();
     coloration->stop();
 }
 

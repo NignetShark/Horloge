@@ -9,8 +9,12 @@
 
 class NTPService : public AsyncService {
 private:
+    AnimationService& anim_service;
 public:
-    NTPService();
+    NTPService(AnimationService& anim_service);
+
+private:
+    void run() override;
 };
 
 

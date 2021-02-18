@@ -13,7 +13,7 @@
 #include "tools/settings.hpp"
 #include "tools/pingpongarray.hpp"
 
-class DigitsService : public AsyncService {
+class DigitsService {
 protected:
     DialMixerInterface& mixer;
 
@@ -21,7 +21,20 @@ protected:
 public:
     DigitsService(DialMixerInterface &mixer);
 
+private:
+
+public:
     void reset();
+
+    /**
+     * If not already started, try to start.
+     */
+    virtual void try_start() = 0;
+
+    /**
+     * A service is not necessarily stopped by the digit service. But it will not be able to print.
+     */
+    virtual void try_stop() = 0;
 };
 
 

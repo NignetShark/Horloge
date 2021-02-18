@@ -5,7 +5,7 @@
 #include "service/digits_service.hpp"
 
 
-DigitsService::DigitsService(DialMixerInterface &mixer) : AsyncService(), mixer(mixer) {
+DigitsService::DigitsService(DialMixerInterface &mixer) : mixer(mixer) {
 }
 
 void DigitsService::reset() {
@@ -14,3 +14,4 @@ void DigitsService::reset() {
         target[i] = 0;
     }
 }
+

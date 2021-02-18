@@ -114,4 +114,12 @@ bool ClockService::array_equals(uint8_t* array1, uint8_t* array2, size_t size) {
     return true;
 }
 
+void ClockService::try_start() {
+    this->start();
+}
+
+void ClockService::try_stop() {
+    this->stop();
+}
+
 

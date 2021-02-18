@@ -8,14 +8,14 @@
 #include "tools/ledmatrix.hpp"
 
 class Animator {
-private:
-    unsigned int index = 0;
 
+protected:
+    unsigned int index = 0;
 public:
     Animator();
 
-    virtual void first_frame(LedMatrix* keyframe) = 0;
-    virtual void next_keyframe(LedMatrix* keyframe, LedMatrix* previous) = 0;
+    virtual bool first_frame(LedMatrix* keyframe) = 0;
+    virtual bool next_keyframe(LedMatrix* keyframe, LedMatrix* previous) = 0;
 
     void incr_index();
 };

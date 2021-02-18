@@ -13,6 +13,7 @@ private:
 
 public:
     virtual void display(LedMatrix& matrix) = 0;
+    virtual void get(LedMatrix *target) = 0;
 };
 
 

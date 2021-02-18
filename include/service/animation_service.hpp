@@ -15,12 +15,13 @@ private:
     Animator* animator = nullptr;
     float increment;
     unsigned int delay;
+    void run() override;
 
 public:
     AnimationService();
-
     void setup(Animator &animator, float increment, unsigned int delay);
-    void run() override;
+
+    void sync_run();
 };
 
 

@@ -9,6 +9,7 @@
 #include <service/timing/clock_service.hpp>
 #include <service/dial_mixer.hpp>
 #include <service/animation_service.hpp>
+#include <service/ntp/ntp_service.hpp>
 #include "display/display.hpp"
 
 class Manager {
@@ -16,11 +17,12 @@ private:
     static Manager* instance;
 
     Display& display;
+    AnimationService anim_service;
+    NTPService ntp_service;
 
     DialMixer* dial_mixer;
     DialColoration* dial_coloration;
     ClockService* clock_service;
-    AnimationService* anim_service;
 
     Service* current_service = nullptr;
 
@@ -34,10 +36,10 @@ public:
     Display& getDisplay();
 
     void start_clock();
-
+    void start_animation();
+    void start_ntp();
     void stop();
 
-    void start_animation();
 };
 
 

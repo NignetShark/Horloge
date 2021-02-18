@@ -31,6 +31,8 @@ public:
     void digits(const uint8_t digits[DIAL_COUNT], const color_t colors[DIAL_COUNT]);
     color_t get(uint8_t digit, uint8_t dial) const;
 
+    void copy(LedMatrix* dest);
+
     void matrixLERP(LedMatrix& result, LedMatrix& final, float t);
 };
 

@@ -19,7 +19,7 @@ add_executable(Horloge
         src/service/timing/clock_service.cpp
         src/tools/timetools.cpp
         src/service/dial_mixer.cpp
-        src/tools/pingpongarray.cpp include/service/animation/wave.hpp src/service/animation/wave.cpp src/service/animation_service.cpp include/service/animation_service.hpp src/manager.cpp include/manager.hpp src/exception/FatalException.cpp include/exception/FatalException.hpp src/service/service.cpp include/service/service.hpp src/service/dial_mixer_interface.cpp include/service/dial_mixer_interface.hpp src/service/animation/animator.cpp include/service/animation/animator.hpp src/service/ntp/ntp_service.cpp include/service/ntp/ntp_service.hpp)
+        src/tools/pingpongarray.cpp include/service/animation/wave.hpp src/service/animation/wave.cpp src/service/animation_service.cpp include/service/animation_service.hpp src/manager.cpp include/manager.hpp src/exception/FatalException.cpp include/exception/FatalException.hpp src/service/service.cpp include/service/service.hpp src/service/dial_mixer_interface.cpp include/service/dial_mixer_interface.hpp src/service/animation/animator.cpp include/service/animation/animator.hpp src/service/ntp/ntp_service.cpp include/service/ntp/ntp_service.hpp src/service/animation/fade.cpp include/service/animation/fade.hpp)
 
 target_include_directories(Horloge PRIVATE include lib/ws281x/include)
 target_link_libraries(Horloge pthread)

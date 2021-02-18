@@ -12,6 +12,7 @@ AnimationService::AnimationService()
 }
 
 void AnimationService::setup(Animator &animator, float increment, unsigned int delay) {
+    if(keepAlive) throw FatalException("Setup cannot cannot be used when the service is running");
     this->animator = &animator;
     this->increment = increment;
     this->delay = delay;
@@ -31,10 +32,12 @@ void AnimationService::run() {
 
     float t;
 
-    animator->first_frame(prev_frame);
+    if(!animator->first_frame(prev_frame)) {
+        display.get(prev_frame);
+    }
 
     while (keepAlive) {
-        animator->next_keyframe(next_frame, prev_frame);
+        if(!animator->next_keyframe(next_frame, prev_frame)) break;
 
         // Animation part
         t = 0;
@@ -54,6 +57,13 @@ void AnimationService::run() {
     }
 
     animator = nullptr;
+    keepAlive = false;
+}
+
+void AnimationService::sync_run() {
+    if(keepAlive) throw FatalException("Sync animation cannot be used when the service is running");
+    keepAlive = true;
+    run();
 }
 
 

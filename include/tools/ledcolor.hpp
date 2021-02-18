@@ -25,6 +25,7 @@ namespace led_color {
     const color_t NIGHT {.rgb = {0, 0, 1, 0}};
     const color_t BLACK {.ws2811 = 0};
     const color_t WHITE {.ws2811 = 0x00FFFFFF};
+    const color_t RED   {.rgb = {0, 0, 255, 0}};
 
     void LERP(color_t target[], const color_t from[], const color_t to[], float t, uint8_t end, uint8_t start = 0);
 

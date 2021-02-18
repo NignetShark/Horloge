@@ -13,7 +13,7 @@ int main() {
     TerminalDisplay display;
     Manager::create(display);
 
-    Manager::get().start_clock();
+    Manager::get().start_ntp();
 
     std::this_thread::sleep_for(std::chrono::seconds(5));
 

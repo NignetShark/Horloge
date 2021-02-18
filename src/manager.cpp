@@ -8,13 +8,12 @@
 
 Manager* Manager::instance;
 
-Manager::Manager(Display &display) : display(display) {
+Manager::Manager(Display &display) : display(display), anim_service(), ntp_service(anim_service) {
     instance = this;
+
     dial_mixer = new DialMixer();
     dial_coloration = new DialColoration(*dial_mixer);
     clock_service = new ClockService(*dial_mixer);
-    anim_service = new AnimationService();
-
 }
 
 void Manager::create(Display &display) {
@@ -48,9 +47,15 @@ void Manager::start_clock() {
 void Manager::start_animation() {
     stop();
     animation::Wave::get().setup(led_color::WHITE);
-    anim_service->setup(animation::Wave::get(), 0.1, 50);
-    anim_service->start();
-    current_service = anim_service;
+    anim_service.setup(animation::Wave::get(), 0.1, 50);
+    anim_service.start();
+    current_service = &anim_service;
+}
+
+void Manager::start_ntp() {
+    stop();
+    ntp_service.start();
+    current_service = &ntp_service;
 }
 
 

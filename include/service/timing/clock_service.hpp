@@ -9,7 +9,7 @@
 #include "service/digits_service.hpp"
 #include "tools/pingpongarray.hpp"
 
-class ClockService : public DigitsService {
+class ClockService : public DigitsService, AsyncService {
 private:
     void waitUntilNextSec();
     bool array_equals(uint8_t* array1, uint8_t* array2, size_t size);
@@ -17,6 +17,9 @@ private:
     void cascadeDigits(uint8_t *toDigits, unsigned int delay_ms);
 public:
     ClockService(DialMixerInterface &mixer);
+
+    void try_start() override;
+    void try_stop() override;
 
     void run() override;
 

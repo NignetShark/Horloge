@@ -66,6 +66,10 @@ void LedMatrix::clear() {
     all(led_color::BLACK);
 }
 
+void LedMatrix::copy(LedMatrix *dest) {
+    std::copy(std::begin(this->matrix), std::end(this->matrix), std::begin(dest->matrix));
+}
+
 
 
 

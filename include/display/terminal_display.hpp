@@ -11,8 +11,11 @@
 class TerminalDisplay : public Display {
 private:
     std::mutex mutex;
+    LedMatrix* last;
 public:
     void display(LedMatrix &matrix) override;
+
+    void get(LedMatrix *target) override;
 };
 
 
