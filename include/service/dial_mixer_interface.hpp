@@ -7,11 +7,14 @@
 
 #include "tools/ledcolor.hpp"
 #include "tools/settings.hpp"
-#include "tools/safearray.hpp"
+#include "tools/pingpongarray.hpp"
 
 class DialMixerInterface {
 public:
-    virtual void paint() = 0;
+    virtual color_t* get_color_array() = 0;
+    virtual uint8_t * get_digit_array() = 0;
+    virtual color_t* paint_color() = 0;
+    virtual uint8_t* paint_digits() = 0;
 };
 
 

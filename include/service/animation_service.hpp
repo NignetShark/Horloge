@@ -5,24 +5,22 @@
 #ifndef HORLOGE_ANIMATION_SERVICE_HPP
 #define HORLOGE_ANIMATION_SERVICE_HPP
 
+#include <service/animation/animator.hpp>
 #include "display/display.hpp"
 #include "async_service.hpp"
 #include "tools/ledmatrix.hpp"
 
 class AnimationService : public AsyncService {
 private:
-protected:
-    unsigned int index = 0;
+    Animator* animator = nullptr;
     float increment;
     unsigned int delay;
 
 public:
-    AnimationService(unsigned int delay, float increment);
+    AnimationService();
 
+    void setup(Animator &animator, float increment, unsigned int delay);
     void run() override;
-
-    virtual void first_frame(LedMatrix* keyframe) = 0;
-    virtual void next_keyframe(LedMatrix* keyframe, LedMatrix* previous) = 0;
 };
 
 

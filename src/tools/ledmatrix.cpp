@@ -62,6 +62,10 @@ color_t LedMatrix::get(uint8_t digit, uint8_t dial) const {
     return matrix[LOOKUP_INDEXES[digit][dial]];
 }
 
+void LedMatrix::clear() {
+    all(led_color::BLACK);
+}
+
 
 
 

@@ -23,7 +23,9 @@ public:
     explicit LedMatrix(bool clear = true);
     ~LedMatrix() = default;
 
+    void clear();
     void all(color_t color);
+
     void set(uint8_t digit, uint8_t dial, color_t color);
     void dial(uint8_t dial, color_t color);
     void digits(const uint8_t digits[DIAL_COUNT], const color_t colors[DIAL_COUNT]);

@@ -9,7 +9,7 @@
 #include "service/coloration/dial_coloration.hpp"
 #include "service/timing/clock_service.hpp"
 
-#include <tools/safearray.hpp>
+#include <tools/pingpongarray.hpp>
 #include <display/display.hpp>
 #include "tools/ledmatrix.hpp"
 #include "dial_mixer_interface.hpp"
@@ -18,11 +18,11 @@
 
 class DialMixer : public Service, public DialMixerInterface {
 private:
-    SafeArray<color_t, DIAL_COUNT>* colors = nullptr;
-    SafeArray<uint8_t, DIAL_COUNT>* digits = nullptr;
+    PingPongArray<color_t, DIAL_COUNT> colors;
+    PingPongArray<uint8_t, DIAL_COUNT> digits;
 
     DialColoration* coloration;
-    TimingService* timing;
+    DigitsService* digit_service;
 
     LedMatrix matrix;
     Display& display;
@@ -30,13 +30,18 @@ private:
 public:
     DialMixer();
 
-    void setup(DialColoration *coloration, TimingService *timing);
+    void setup(DialColoration *coloration, DigitsService *timing);
 
     void _start() override;
     void _stop() override;
 
 
-    void paint() override;
+    color_t* paint_color() override;
+    uint8_t* paint_digits() override;
+
+    color_t *get_color_array() override;
+
+    uint8_t * get_digit_array() override;
 
 
 };

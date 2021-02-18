@@ -10,36 +10,76 @@
 DialMixer::DialMixer() : display(Manager::get().getDisplay()) {
 }
 
-void DialMixer::setup(DialColoration *coloration, TimingService *timing) {
-    this->timing = timing;
+void DialMixer::setup(DialColoration *coloration, DigitsService *timing) {
+    this->digit_service = timing;
     this->coloration = coloration;
-    this->digits = timing->getDigits();
-    this->colors = coloration->getPattern();
 }
 
 void DialMixer::_start() {
-    if(timing == nullptr || coloration == nullptr) throw FatalException("No setup for dual mixer");
+    if(digit_service == nullptr || coloration == nullptr) throw FatalException("No setup for dual mixer");
     coloration->start();
-    timing->start();
+    digit_service->start();
 }
 
 void DialMixer::_stop() {
-    timing->stop();
+    digit_service->stop();
     coloration->stop();
 }
 
-void DialMixer::paint() {
-    matrix.all(led_color::BLACK);
+color_t* DialMixer::paint_color() {
+    // WARNING: Only DialColoration thread can call this.
+    // DialColoration is synchronous
+    // DigitsService is asynchronous
 
-    uint8_t* v_digits = digits->lock_get();
-    color_t* v_colors = colors->lock_get();
+    colors.lock();
+    digits.lock();
 
-    matrix.digits(v_digits, v_colors);
+    colors.unsafe_swap();
 
-    colors->unlock();
-    digits->unlock();
+
+    matrix.clear();
+
+    matrix.digits(digits.getBack(), colors.getBack());
+
+    colors.unlock();
+    digits.unlock();
 
     display.display(matrix);
+
+    return colors.getFront();
+}
+
+uint8_t *DialMixer::paint_digits() {
+    // WARNING: Only DigitsService thread can call this.
+    // DigitsService is synchronous
+    // DialColoration is asynchronous
+
+    colors.lock();
+    digits.lock();
+
+    digits.unsafe_swap();
+
+
+    matrix.clear();
+
+    matrix.digits(digits.getBack(), colors.getBack());
+
+    colors.unlock();
+    digits.unlock();
+
+    display.display(matrix);
+
+    return digits.getFront();
+}
+
+color_t *DialMixer::get_color_array() {
+    // WARNING: Only DialColoration thread can call this.
+    return colors.getFront();
+}
+
+uint8_t * DialMixer::get_digit_array() {
+    // WARNING: Only DigitsService thread can call this.
+    return digits.getFront();
 }
 
 

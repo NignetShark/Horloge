@@ -7,7 +7,7 @@
 
 
 #include <tools/ledcolor.hpp>
-#include "tools/safearray.hpp"
+#include "tools/pingpongarray.hpp"
 #include "service/coloration_service.hpp"
 
 typedef enum {
@@ -20,7 +20,6 @@ typedef enum {
 
 class DialColoration : public ColorationService {
 private:
-    SafeArray<color_t, DIAL_COUNT> pattern;
     DialMixerInterface& mixer;
 
     /*** GENERIC FUNCTIONS ***/
@@ -36,8 +35,6 @@ public:
     void run() override;
 
     void mode(size_t index) override;
-
-    SafeArray<color_t, DIAL_COUNT> *getPattern();
 
 
 };

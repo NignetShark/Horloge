@@ -9,15 +9,15 @@
 #include "tools/timetools.hpp"
 
 
-ClockService::ClockService(DialMixerInterface &mixer) : TimingService(mixer) {
+ClockService::ClockService(DialMixerInterface& mixer) : DigitsService(mixer) {
     reset(); // Important to prevent uninitialized values
 }
 
 void ClockService::run() {
-    uint8_t* target = this->digits.unsafe_get();
-
     // Launch animation
-    mixer.paint();
+    reset();
+    uint8_t* target = mixer.paint_digits();
+
     cascadeNumbersToTime(50);
 
     while (keepAlive) {
@@ -27,7 +27,7 @@ void ClockService::run() {
 
 
         TimeTools::time2digits(target, local_tm);
-        mixer.paint();
+        target = mixer.paint_digits();
 
         // Go back to 0 animation.
         if(target[5] == 9){
@@ -45,12 +45,11 @@ void ClockService::run() {
 }
 
 void ClockService::cascadeDigits(uint8_t* toDigits, unsigned int delay_ms) {
-    uint8_t* target = this->digits.unsafe_get();
+    uint8_t* target = mixer.get_digit_array();
     wait_ms(delay_ms);
 
     while(!array_equals(target, toDigits, DIAL_COUNT) and keepAlive){
 
-        digits.lock();
         for(uint8_t i = 0; i < DIAL_COUNT; i++){
             if(target[i] < toDigits[i]){
                 target[i]++;
@@ -60,15 +59,14 @@ void ClockService::cascadeDigits(uint8_t* toDigits, unsigned int delay_ms) {
                 target[i]--;
             }
         }
-        digits.unlock();
 
-        mixer.paint();
+        target = mixer.paint_digits();
         wait_ms(delay_ms);
     }
 }
 
-void ClockService::cascadeNumbersToTime(u_int16_t delay_ms) {
-    uint8_t* target = digits.lock_get();
+void ClockService::cascadeNumbersToTime(unsigned int delay_ms) {
+    uint8_t* target = mixer.get_digit_array();
 
     time_t now = time(0);
     tm* local_tm = localtime(&now);
@@ -76,7 +74,6 @@ void ClockService::cascadeNumbersToTime(u_int16_t delay_ms) {
     uint8_t targetNum[3], currentNum[3];
     TimeTools::time2numbers(currentNum, local_tm);
     TimeTools::digits2numbers(targetNum, target);
-    digits.unlock();
 
     wait_ms(delay_ms);
 
@@ -95,12 +92,9 @@ void ClockService::cascadeNumbersToTime(u_int16_t delay_ms) {
         now = time(0);
         local_tm = localtime(&now);
         TimeTools::time2numbers(currentNum, local_tm);
-
-        digits.lock();
         TimeTools::numbers2digits(target, targetNum);
-        digits.unlock();
 
-        mixer.paint();
+        target = mixer.paint_digits();
 
         wait_ms(delay_ms);
     }
@@ -120,10 +114,4 @@ bool ClockService::array_equals(uint8_t* array1, uint8_t* array2, size_t size) {
     return true;
 }
 
-void ClockService::reset() {
-    uint8_t* target = this->digits.lock_get();
-    for(uint8_t i = 0; i < DIAL_COUNT; i++) {
-        target[i] = 0;
-    }
-    digits.unlock();
-}
+

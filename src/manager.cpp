@@ -2,6 +2,7 @@
 // Created by paul on 18/02/2021.
 //
 
+#include <service/animation/wave.hpp>
 #include <exception/FatalException.hpp>
 #include "manager.hpp"
 
@@ -11,8 +12,9 @@ Manager::Manager(Display &display) : display(display) {
     instance = this;
     dial_mixer = new DialMixer();
     dial_coloration = new DialColoration(*dial_mixer);
-    clock_service = new ClockService(*dial_mixer),
-    anim_wave = new animation::Wave(led_color::WHITE, 50);
+    clock_service = new ClockService(*dial_mixer);
+    anim_service = new AnimationService();
+
 }
 
 void Manager::create(Display &display) {
@@ -45,8 +47,10 @@ void Manager::start_clock() {
 
 void Manager::start_animation() {
     stop();
-    anim_wave->start();
-    current_service = anim_wave;
+    animation::Wave::get().setup(led_color::WHITE);
+    anim_service->setup(animation::Wave::get(), 0.1, 50);
+    anim_service->start();
+    current_service = anim_service;
 }
 
 

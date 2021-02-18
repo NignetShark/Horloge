@@ -5,24 +5,28 @@
 #ifndef HORLOGE_WAVE_HPP
 #define HORLOGE_WAVE_HPP
 
-#include <service/animation_service.hpp>
+#include "animator.hpp"
 
 namespace animation {
 
-    class Wave : public AnimationService {
+    class Wave : public Animator {
     private:
+
         uint8_t sizes[DIAL_COUNT];
         bool direction[DIAL_COUNT];
         color_t color;
 
         void wave_set(LedMatrix *matrix, color_t color);
+        Wave();
 
     public:
-        Wave(color_t color, unsigned int delay);
+        void setup(color_t color);
 
         void next_keyframe(LedMatrix *keyframe, LedMatrix *previous) override;
 
         void first_frame(LedMatrix *keyframe) override;
+
+        static Wave& get();
 
     };
 }

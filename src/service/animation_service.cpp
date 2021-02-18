@@ -3,14 +3,23 @@
 //
 
 #include <manager.hpp>
+#include <exception/FatalException.hpp>
 #include "service/animation_service.hpp"
 
-AnimationService::AnimationService(unsigned int delay, float increment)
-        : AsyncService(), delay(delay), increment(increment) {
+AnimationService::AnimationService()
+        : AsyncService(), animator() {
 
 }
 
+void AnimationService::setup(Animator &animator, float increment, unsigned int delay) {
+    this->animator = &animator;
+    this->increment = increment;
+    this->delay = delay;
+}
+
 void AnimationService::run() {
+    if(animator == nullptr) throw FatalException("Animation not defined");
+
     Display& display = Manager::get().getDisplay();
 
     LedMatrix key_frame_1;
@@ -22,10 +31,10 @@ void AnimationService::run() {
 
     float t;
 
-    first_frame(prev_frame);
+    animator->first_frame(prev_frame);
 
     while (keepAlive) {
-        next_keyframe(next_frame, prev_frame);
+        animator->next_keyframe(next_frame, prev_frame);
 
         // Animation part
         t = 0;
@@ -41,7 +50,11 @@ void AnimationService::run() {
         LedMatrix *temp = next_frame;
         next_frame = prev_frame;
         prev_frame = temp;
-        index++;
+        animator->incr_index();
     }
 
+    animator = nullptr;
 }
+
+
+

@@ -9,9 +9,12 @@
 
 namespace animation {
 
-    Wave::Wave(color_t color, unsigned int delay) : AnimationService(delay, 0.1),
-                                                                      color(color), sizes() {
+    Wave::Wave() : sizes() {
 
+    }
+
+    void Wave::setup(color_t color) {
+        this->color = color;
     }
 
     void Wave::wave_set(LedMatrix *matrix, color_t color) {
@@ -44,4 +47,11 @@ namespace animation {
         wave_set(keyframe, color);
         //keyframe->all(color);
     }
+
+    Wave &Wave::get() {
+        static Wave instance;
+        return instance;
+    }
+
+
 }
