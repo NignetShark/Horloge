@@ -20,18 +20,23 @@ typedef enum {
 
 class DialColoration : public ColorationService {
 private:
+    SafeArray<color_t, DIAL_COUNT> pattern;
+    DialMixerInterface& mixer;
+
     /*** GENERIC FUNCTIONS ***/
     void unicolor(color_t color);
     void unicolors(color_t *colors);
     void movingRainbow(float *hueOffsets, uint16_t delay_ms, float increment = 1);
 
 public:
-    DialColoration(DialMixer &mixer);
+    DialColoration(DialMixerInterface& mixer);
+
 
     void run() override;
 
     void mode(size_t index) override;
 
+    SafeArray<color_t, DIAL_COUNT> *getPattern();
 
 
 };

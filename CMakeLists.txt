@@ -15,11 +15,11 @@ add_executable(Horloge
         src/service/coloration/dial_coloration.cpp
         src/service/timing_service.cpp
         src/tools/selector.cpp
-        src/service/service.cpp
+        src/service/async_service.cpp
         src/service/timing/clock_service.cpp
         src/tools/timetools.cpp
-        src/dial_mixer.cpp
-        src/tools/safearray.cpp)
+        src/service/dial_mixer.cpp
+        src/tools/safearray.cpp include/service/animation/wave.hpp src/service/animation/wave.cpp src/service/animation_service.cpp include/service/animation_service.hpp src/manager.cpp include/manager.hpp src/exception/FatalException.cpp include/exception/FatalException.hpp src/service/service.cpp include/service/service.hpp src/service/dial_mixer_interface.cpp include/service/dial_mixer_interface.hpp)
 
 target_include_directories(Horloge PRIVATE include lib/ws281x/include)
 target_link_libraries(Horloge pthread)

@@ -27,9 +27,9 @@ public:
     void set(uint8_t digit, uint8_t dial, color_t color);
     void dial(uint8_t dial, color_t color);
     void digits(const uint8_t digits[DIAL_COUNT], const color_t colors[DIAL_COUNT]);
-    void matrixLERP(LedMatrix& result, LedMatrix& final, float t);
     color_t get(uint8_t digit, uint8_t dial) const;
 
+    void matrixLERP(LedMatrix& result, LedMatrix& final, float t);
 };
 
 #endif //HORLOGE_LEDMATRIX_HPP

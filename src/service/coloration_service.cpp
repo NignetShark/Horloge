@@ -4,7 +4,7 @@
 
 #include "service/coloration_service.hpp"
 
-ColorationService::ColorationService(DialMixer& mixer, size_t nb_modes, size_t default_mode) : Selector(nb_modes, default_mode), mixer(mixer) {
+ColorationService::ColorationService(size_t nb_modes, size_t default_mode) : Selector(nb_modes, default_mode) {
 
 }
 

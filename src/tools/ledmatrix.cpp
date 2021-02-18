@@ -12,7 +12,7 @@ static uint8_t LOOKUP_INDEXES[DIGITS_COUNT][DIAL_COUNT];  // Look up table use t
 /**
  * Setup the lookup table
  */
-__attribute__((constructor)) // Important inorder to setup before using it. (Works with gcc and clang)
+__attribute__((constructor)) // Important in order to setup before using it. (Works with gcc and clang)
 void setup_lookup_indexes() {
     for(uint8_t digit = 0; digit < DIGITS_COUNT; digit++) {
         for(uint8_t dial = 0; dial < DIAL_COUNT; dial++) {

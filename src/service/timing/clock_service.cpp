@@ -3,17 +3,17 @@
 //
 
 #include <iostream>
+#include <exception/FatalException.hpp>
 #include "sys/time.h"
 #include "service/timing/clock_service.hpp"
 #include "tools/timetools.hpp"
 
 
-ClockService::ClockService(DialMixer &mixer) : TimingService(mixer) {
+ClockService::ClockService(DialMixerInterface &mixer) : TimingService(mixer) {
 
 }
 
 void ClockService::run() {
-    mixer.set_digits_ptr(&digits);
     uint8_t* target = this->digits.unsafe_get();
 
     // Launch animation
@@ -25,10 +25,9 @@ void ClockService::run() {
         time_t now = time(0);
         tm* local_tm = localtime(&now);
 
-        digits.lock();
+
         TimeTools::time2digits(target, local_tm);
-        mixer.digits_ready(target);
-        digits.unlock();
+        mixer.paint();
 
         // Go back to 0 animation.
         if(target[5] == 9){
@@ -46,14 +45,12 @@ void ClockService::run() {
 }
 
 void ClockService::cascadeDigits(uint8_t* toDigits, unsigned int delay_ms) {
-    uint8_t* target = this->digits.lock_get();
-    digits.unlock();
-
+    uint8_t* target = this->digits.unsafe_get();
     wait_ms(delay_ms);
 
     while(!array_equals(target, toDigits, DIAL_COUNT) and keepAlive){
-        digits.lock();
 
+        digits.lock();
         for(uint8_t i = 0; i < DIAL_COUNT; i++){
             if(target[i] < toDigits[i]){
                 target[i]++;
@@ -63,9 +60,9 @@ void ClockService::cascadeDigits(uint8_t* toDigits, unsigned int delay_ms) {
                 target[i]--;
             }
         }
-
-        mixer.digits_ready(target);
         digits.unlock();
+
+        mixer.paint();
         wait_ms(delay_ms);
     }
 }
@@ -101,8 +98,9 @@ void ClockService::cascadeNumbersToTime(u_int16_t delay_ms) {
 
         digits.lock();
         TimeTools::numbers2digits(target, targetNum);
-        mixer.digits_ready(target);
         digits.unlock();
+
+        mixer.paint();
 
         wait_ms(delay_ms);
     }
@@ -127,6 +125,6 @@ void ClockService::reset() {
     for(uint8_t i = 0; i < DIAL_COUNT; i++) {
         target[i] = 0;
     }
-    mixer.digits_ready(target);
     digits.unlock();
+    mixer.paint();
 }

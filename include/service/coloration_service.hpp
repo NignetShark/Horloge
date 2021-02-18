@@ -8,20 +8,19 @@
 #include <tools/selector.hpp>
 #include "tools/safearray.hpp"
 #include "tools/settings.hpp"
-#include <service/service.hpp>
-#include <dial_mixer.hpp>
+#include <service/async_service.hpp>
+#include <service/dial_mixer_interface.hpp>
 
-class ColorationService : public Service, public Selector {
+class ColorationService : public AsyncService, public Selector {
 private:
 
     void beforeChanging() override;
 
 protected:
-    SafeArray<color_t, DIAL_COUNT> pattern;
-    DialMixer& mixer;
+
 
 public:
-    ColorationService(DialMixer& mixer, size_t nb_modes, size_t default_mode);
+    ColorationService(size_t nb_modes, size_t default_mode);
 };
 
 

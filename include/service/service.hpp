@@ -1,25 +1,16 @@
 //
-// Created by paul on 17/02/2021.
+// Created by paul on 18/02/2021.
 //
 
 #ifndef HORLOGE_SERVICE_HPP
 #define HORLOGE_SERVICE_HPP
-#include <thread>
+
 
 class Service {
-private:
-    std::thread service_thread;
-
-    virtual void run() = 0;
-
-protected:
-    bool keepAlive = false;
-
 public:
-    void start();
-    void stop();
+    virtual void start() = 0;
+    virtual void stop() = 0;
 
-    static void wait_ms(unsigned int delay);
 };
 
 

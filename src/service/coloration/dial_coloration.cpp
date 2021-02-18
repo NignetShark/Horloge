@@ -2,24 +2,26 @@
 // Created by paul on 17/02/2021.
 //
 
+#include <exception/FatalException.hpp>
 #include "service/coloration/dial_coloration.hpp"
 
-DialColoration::DialColoration(DialMixer &mixer) : ColorationService(mixer, NB_DIAL_MODE, RAINBOW) {
+DialColoration::DialColoration(DialMixerInterface& mixer) : ColorationService(NB_DIAL_MODE, RAINBOW), mixer(mixer) {
 }
 
 void DialColoration::run() {
     unicolor(led_color::BLACK);
-    mixer.set_colors_ptr(&pattern);
     this->current();
 }
+
+
 
 void DialColoration::unicolors(color_t* colors) {
     color_t* target = pattern.lock_get();
     for(uint8_t i = 0; i < DIAL_COUNT; i++) {
         target[i] = colors[i];
     }
-    mixer.colors_ready(target);
     pattern.unlock();
+    mixer.paint();
 }
 
 void DialColoration::unicolor(color_t color) {
@@ -27,8 +29,8 @@ void DialColoration::unicolor(color_t color) {
     for(uint8_t i = 0; i < DIAL_COUNT; i++) {
         target[i] = color;
     }
-    mixer.colors_ready(target);
     pattern.unlock();
+    mixer.paint();
 }
 
 void DialColoration::movingRainbow(float* hueOffsets, uint16_t delay_ms, float increment){
@@ -66,3 +68,8 @@ void DialColoration::mode(size_t index) {
             break;
     }
 }
+
+SafeArray<color_t, DIAL_COUNT> *DialColoration::getPattern() {
+    return &pattern;
+}
+

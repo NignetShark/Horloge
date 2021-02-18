@@ -7,21 +7,20 @@
 
 
 #include <cstdint>
-#include <service/service.hpp>
+#include <service/async_service.hpp>
 #include <mutex>
-#include <dial_mixer.hpp>
+#include <service/dial_mixer_interface.hpp>
 #include "tools/settings.hpp"
 #include "tools/safearray.hpp"
 
-class TimingService : public Service {
+class TimingService : public AsyncService {
 protected:
     SafeArray<uint8_t, DIAL_COUNT> digits;
-    DialMixer& mixer;
+    DialMixerInterface& mixer;
 
 public:
-    TimingService(DialMixer& mixer);
-
-
+    TimingService(DialMixerInterface &mixer);
+    SafeArray<uint8_t, DIAL_COUNT> *getDigits();
 };
 
 

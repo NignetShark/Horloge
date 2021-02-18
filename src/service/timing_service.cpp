@@ -5,5 +5,10 @@
 #include "service/timing_service.hpp"
 
 
-TimingService::TimingService(DialMixer &mixer) : mixer(mixer) {
+TimingService::TimingService(DialMixerInterface &mixer) : AsyncService(),  mixer(mixer) {
+}
+
+
+SafeArray<uint8_t, DIAL_COUNT> *TimingService::getDigits() {
+    return &digits;
 }

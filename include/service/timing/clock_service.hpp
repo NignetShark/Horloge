@@ -19,7 +19,7 @@ private:
     void cascadeNumbersToTime(u_int16_t delay_ms);
     void cascadeDigits(uint8_t *toDigits, unsigned int delay_ms);
 public:
-    ClockService(DialMixer& mixer);
+    ClockService(DialMixerInterface &mixer);
 
     void run() override;
 
