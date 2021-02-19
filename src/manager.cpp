@@ -8,7 +8,7 @@
 
 Manager* Manager::instance;
 
-Manager::Manager(Display &display) : display(display), anim_service(), ntp_service(anim_service) {
+Manager::Manager(Display &display) : display(display), anim_service(), ntp_service(anim_service), scheduler() {
     instance = this;
 
     dial_mixer = new DialMixer();
@@ -58,5 +58,15 @@ void Manager::start_ntp() {
     ntp_service.start_sync();
     current_base_service = nullptr;
 }
+
+Scheduler& Manager::getScheduler() {
+    return scheduler;
+}
+
+void Manager::start_scheduler() {
+    scheduler.start();
+}
+
+
 
 

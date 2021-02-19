@@ -34,3 +34,7 @@ bool AsyncService::is_alive() const {
     return keepAlive;
 }
 
+void AsyncService::wait_until(time_t date) {
+    std::this_thread::sleep_until(std::chrono::system_clock::from_time_t(date));
+}
+

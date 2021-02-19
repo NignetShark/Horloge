@@ -19,6 +19,8 @@ private:
      */
     virtual void run() = 0;
 
+    void _start_sync() override;
+
 protected:
     /**
      * true = service running
@@ -28,11 +30,6 @@ protected:
 public:
     void _start() override;
     void _stop() override;
-
-private:
-    void _start_sync() override;
-
-public:
 
     /**
      * Is the service running ?
@@ -45,6 +42,12 @@ public:
      * @param delay in milliseconds
      */
     static void wait_ms(unsigned int delay);
+
+    /**
+     * Wait until a specific date
+     * @param date
+     */
+    static void wait_until(time_t date);
 };
 
 

@@ -27,6 +27,9 @@ private:
      */
     virtual void _stop() = 0;
 
+    /**
+     * Request a sync run
+     */
     virtual void _start_sync() = 0;
 
 public:
@@ -34,11 +37,6 @@ public:
      * Stop all running services
      */
     static void stop_all();
-
-    /**
-     * Start a service
-     */
-    void start();
 
     /**
      * Start and wait for termination
@@ -49,6 +47,11 @@ public:
      * Stop a service
      */
     void stop();
+
+    /**
+     * Start a service
+     */
+    void start();
 };
 
 

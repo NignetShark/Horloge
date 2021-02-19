@@ -1,13 +1,9 @@
 #include <iostream>
 #include <display/terminal_display.hpp>
-#include <service/dial_mixer.hpp>
-#include <service/coloration/dial_coloration.hpp>
 #include <service/timing/clock_service.hpp>
 #include <manager.hpp>
 #include <display/nixie_display.hpp>
-#include "tools/ledmatrix.hpp"
-#include "tools/ledcolor.hpp"
-#include "tools/debugprint.hpp"
+#include <service/scheduler/day_night_task.hpp>
 
 
 int main() {
@@ -16,6 +12,21 @@ int main() {
     TerminalDisplay display;
 
     Manager::create(display); // Create the manager
+
+    time_t now = time(0), day, night;
+    tm* time = localtime(&now);
+    time->tm_hour = 22;
+    time->tm_min = 0;
+    time->tm_sec = 0;
+    night = mktime(time);
+    time->tm_hour = 8;
+    time->tm_min = 0;
+    time->tm_sec = 0;
+    day = mktime(time);
+
+    DayNightTask day_night_task(day, night);
+    Manager::get().getScheduler().append(&day_night_task);
+    Manager::get().start_scheduler();
 
     Manager::get().start_ntp();
 

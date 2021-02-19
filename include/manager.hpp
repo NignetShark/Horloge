@@ -10,6 +10,7 @@
 #include <service/dial_mixer.hpp>
 #include <service/animation_service.hpp>
 #include <service/ntp/ntp_service.hpp>
+#include <service/scheduler/scheduler.hpp>
 #include "display/display.hpp"
 
 /**
@@ -27,6 +28,8 @@ private:
     DialMixer* dial_mixer;
     DialColoration* dial_coloration;
     ClockService* clock_service;
+
+    Scheduler scheduler;
 
     /**
      * Current base service
@@ -55,9 +58,12 @@ public:
      */
     Display& getDisplay();
 
+    Scheduler& getScheduler();
+
     void start_clock();
     void start_animation();
     void start_ntp();
+    void start_scheduler();
 
     /**
      * Stop the current base process
