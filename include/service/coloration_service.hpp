@@ -11,9 +11,15 @@
 #include <service/async_service.hpp>
 #include <service/dial_mixer_interface.hpp>
 
+/**
+ * Abstract class of any coloration service
+ */
 class ColorationService : public AsyncService, public Selector {
 private:
 
+    /**
+     * Called when change is requested
+     */
     void beforeChanging() override;
 
 protected:

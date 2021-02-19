@@ -7,16 +7,40 @@
 
 #include <set>
 
+/**
+ * Abstract class of any service
+ */
 class Service {
 private:
+    /**
+     * Set of all running service
+     */
     static std::set<Service*> running;
+
+    /**
+     * Request start
+     */
     virtual void _start() = 0;
+
+    /**
+     * Request stop
+     */
     virtual void _stop() = 0;
 
 public:
+    /**
+     * Stop all running services
+     */
     static void stop_all();
 
+    /**
+     * Start a service
+     */
     void start();
+
+    /**
+     * Stop a service
+     */
     void stop();
 };
 

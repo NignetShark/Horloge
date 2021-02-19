@@ -3,7 +3,7 @@
 //
 
 #include <manager.hpp>
-#include <exception/FatalException.hpp>
+#include <exception/fatal_exception.hpp>
 #include "service/dial_mixer.hpp"
 
 
@@ -11,19 +11,25 @@ DialMixer::DialMixer() : display(Manager::get().getDisplay()) {
 }
 
 void DialMixer::setup(DialColoration *coloration, DigitsService *timing) {
+    if(this->digit_service != nullptr && coloration_service != nullptr) {
+        if(coloration->is_alive() || digit_service->is_alive()) {
+            throw FatalException("Cannot setup dial mixer while coloration or digits is running");
+        }
+    }
     this->digit_service = timing;
-    this->coloration = coloration;
+    this->coloration_service = coloration;
 }
 
 void DialMixer::_start() {
-    if(digit_service == nullptr || coloration == nullptr) throw FatalException("No setup for dual mixer");
-    coloration->start();
+    if(digit_service == nullptr || coloration_service == nullptr) throw FatalException("No setup for dual mixer");
+    coloration_service->start();
     digit_service->try_start();
 }
 
 void DialMixer::_stop() {
     digit_service->try_stop();
-    coloration->stop();
+    coloration_service->stop();
+    display.save_state(&matrix);
 }
 
 color_t* DialMixer::paint_color() {

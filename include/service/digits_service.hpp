@@ -13,6 +13,9 @@
 #include "tools/settings.hpp"
 #include "tools/pingpongarray.hpp"
 
+/**
+ * Abstract class of any process that use digits
+ */
 class DigitsService {
 protected:
     DialMixerInterface& mixer;
@@ -21,9 +24,9 @@ protected:
 public:
     DigitsService(DialMixerInterface &mixer);
 
-private:
-
-public:
+    /**
+     * Reset digits array
+     */
     void reset();
 
     /**
@@ -35,6 +38,12 @@ public:
      * A service is not necessarily stopped by the digit service. But it will not be able to print.
      */
     virtual void try_stop() = 0;
+
+    /**
+     * Is the process running ?
+     * @return true if running
+     */
+    virtual bool is_alive() = 0;
 };
 
 

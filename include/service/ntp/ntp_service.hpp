@@ -10,22 +10,43 @@
 #define HOST_NAME "fr.pool.ntp.org"
 #define NTP_PORT 123
 
+/**
+ * NTP Service to get right time
+ */
 class NTPService : public AsyncService {
 private:
     AnimationService& anim_service;
+
+    void run() override;
+
+    /**
+     * Animation of 404 error
+     * @param attempt (number of remaining attempts)
+     */
+    void err404(unsigned int attempt);
+
+    /**
+     * Animation of success
+     */
+    void success();
+
+    /**
+     * Animation for waiting
+     * @param from duration in sec
+     * @param color
+     */
+    void wait_chrono(uint8_t from, color_t color);
+
+    /**
+     * Get the time from a NTP server
+     * @return
+     */
+    time_t getNTPTime();
+
 public:
     NTPService(AnimationService& anim_service);
 
-private:
-    void run() override;
 
-    void err404(unsigned int attempt);
-
-    void success();
-
-    void chrono(uint8_t from, color_t color);
-
-    time_t getNTPTime();
 };
 
 

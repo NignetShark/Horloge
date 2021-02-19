@@ -10,17 +10,42 @@
 #include "async_service.hpp"
 #include "tools/ledmatrix.hpp"
 
+/**
+ * Service use to show an animation
+ */
 class AnimationService : public AsyncService {
 private:
+    /**
+     * Animation object set in setup()
+     */
     Animator* animator = nullptr;
+
+    /**
+     * Increment for LERP interpolation
+     */
     float increment;
+
+    /**
+     * Delay for LERP interpolation
+     */
     unsigned int delay;
+
     void run() override;
 
 public:
     AnimationService();
+
+    /**
+     * Setup the service
+     * @param animator specify the animation
+     * @param increment used for LERP
+     * @param delay used for LERP
+     */
     void setup(Animator &animator, float increment, unsigned int delay);
 
+    /**
+     * Run this service as a synchronous service (used inside an asynchronous service like NTP).
+     */
     void sync_run();
 };
 

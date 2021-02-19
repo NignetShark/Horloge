@@ -7,19 +7,54 @@
 
 #include <vector>
 
+/**
+ * Class that provide a selection
+ */
 class Selector {
 private:
+    /**
+     * Current mode
+     */
     size_t index;
+
+    /**
+     * Number of modes
+     */
     size_t size;
 
 public:
-    Selector(size_t size, size_t default_index);
 
+    /**
+     * Define a mode selector
+     * @param size number of mode
+     * @param default_index default mode
+     */
+    Selector(size_t size, size_t default_index);
+    
+    /**
+     * Call next mode
+     */
     void next();
+
+    /**
+     * Call previous mode
+     */
     void previous();
+
+    /**
+     * Call the current mode
+     */
     void current();
 
+    /**
+     * Called before any change
+     */
     virtual void beforeChanging() = 0;
+
+    /**
+     * Called when a mode is selected
+     * @param index
+     */
     virtual void mode(size_t index) = 0;
 };
 

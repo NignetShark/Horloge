@@ -21,7 +21,7 @@ private:
     PingPongArray<color_t, DIAL_COUNT> colors;
     PingPongArray<uint8_t, DIAL_COUNT> digits;
 
-    DialColoration* coloration;
+    DialColoration* coloration_service;
     DigitsService* digit_service;
 
     LedMatrix matrix;

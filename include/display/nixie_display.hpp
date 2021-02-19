@@ -7,13 +7,18 @@
 
 #include "display.hpp"
 
+/**
+ * Nixie display based on ws2811 LEDs.
+ */
 class NixieDisplay : public Display {
 private:
+    ws2811_t clock;
 
 public:
+    NixieDisplay();
+
     void display(LedMatrix &matrix) override;
 
-    void get(LedMatrix *target) override;
 };
 
 

@@ -12,6 +12,10 @@
 #include <service/ntp/ntp_service.hpp>
 #include "display/display.hpp"
 
+/**
+ * Manager of all the services
+ * Singleton model.
+ */
 class Manager {
 private:
     static Manager* instance;
@@ -24,20 +28,40 @@ private:
     DialColoration* dial_coloration;
     ClockService* clock_service;
 
-    Service* current_service = nullptr;
+    /**
+     * Current base service
+     */
+    Service* current_base_service = nullptr;
 
     Manager(Display& display);
     ~Manager();
 
 public:
+    /**
+     * Create the manager
+     * @param display use to show LedMatrix
+     */
     static void create(Display& display);
+
+    /**
+     * Return the current instance
+     * @return current instance
+     */
     static Manager& get();
 
+    /**
+     * Return display used to show LedMatrix
+     * @return display
+     */
     Display& getDisplay();
 
     void start_clock();
     void start_animation();
     void start_ntp();
+
+    /**
+     * Stop the current base process
+     */
     void stop();
 
 };

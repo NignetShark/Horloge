@@ -70,6 +70,10 @@ void LedMatrix::copy(LedMatrix *dest) {
     std::copy(std::begin(this->matrix), std::end(this->matrix), std::begin(dest->matrix));
 }
 
+const color_t *LedMatrix::getMatrix() const {
+    return matrix;
+}
+
 
 
 

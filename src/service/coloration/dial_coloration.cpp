@@ -2,7 +2,7 @@
 // Created by paul on 17/02/2021.
 //
 
-#include <exception/FatalException.hpp>
+#include <exception/fatal_exception.hpp>
 #include "service/coloration/dial_coloration.hpp"
 
 DialColoration::DialColoration(DialMixerInterface& mixer) : ColorationService(NB_DIAL_MODE, RAINBOW), mixer(mixer) {

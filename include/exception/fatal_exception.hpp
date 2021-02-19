@@ -2,11 +2,14 @@
 // Created by paul on 18/02/2021.
 //
 
-#ifndef HORLOGE_FATALEXCEPTION_HPP
-#define HORLOGE_FATALEXCEPTION_HPP
+#ifndef HORLOGE_FATAL_EXCEPTION_HPP
+#define HORLOGE_FATAL_EXCEPTION_HPP
 
 #include <stdexcept>
 
+/**
+ * Used when an error is not recoverable.
+ */
 class FatalException : public std::logic_error {
 public:
     FatalException(std::string what);
@@ -15,4 +18,4 @@ public:
 };
 
 
-#endif //HORLOGE_FATALEXCEPTION_HPP
+#endif //HORLOGE_FATAL_EXCEPTION_HPP

@@ -3,7 +3,7 @@
 //
 
 #include <manager.hpp>
-#include <exception/FatalException.hpp>
+#include <exception/fatal_exception.hpp>
 #include "service/animation_service.hpp"
 
 AnimationService::AnimationService()
@@ -34,7 +34,7 @@ void AnimationService::run() {
     animator->reset_index();
 
     if(!animator->first_frame(prev_frame)) {
-        display.get(prev_frame);
+        display.load_state(prev_frame);
     }
 
     while (keepAlive) {
@@ -57,6 +57,7 @@ void AnimationService::run() {
         animator->incr_index();
     }
 
+    display.save_state(&result);
     animator = nullptr;
     keepAlive = false;
 }

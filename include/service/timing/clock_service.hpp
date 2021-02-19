@@ -9,19 +9,45 @@
 #include "service/digits_service.hpp"
 #include "tools/pingpongarray.hpp"
 
+/**
+ * Service used to manage digits with the aim to show the time
+ */
 class ClockService : public DigitsService, AsyncService {
 private:
+    /**
+     * Wait until the next sec
+     */
     void waitUntilNextSec();
+
+    /**
+     * Compare two array
+     * @param array1
+     * @param array2
+     * @param size
+     * @return if they are equals
+     */
     bool array_equals(uint8_t* array1, uint8_t* array2, size_t size);
+
+    /**
+     * Launching animation until the time is displayed
+     * @param delay_ms between each frame
+     */
     void cascadeNumbersToTime(unsigned int delay_ms);
+
+    /**
+     * Animation when 59sec is reached
+     * @param delay_ms between each frame
+     */
     void cascadeDigits(uint8_t *toDigits, unsigned int delay_ms);
+
+    void run() override;
 public:
+
     ClockService(DialMixerInterface &mixer);
 
     void try_start() override;
     void try_stop() override;
-
-    void run() override;
+    bool is_alive() override;
 
 
 };

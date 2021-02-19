@@ -18,6 +18,9 @@ typedef enum {
     NB_DIAL_MODE
 } dial_color_mode_t;
 
+/**
+ * Service used by a dial mixer to get the dial coloration
+ */
 class DialColoration : public ColorationService {
 private:
     DialMixerInterface& mixer;
@@ -30,10 +33,17 @@ private:
 public:
     DialColoration(DialMixerInterface& mixer);
 
+    /**
+     * Reset the color array
+     */
     void reset();
 
     void run() override;
 
+    /**
+     * Change the mode
+     * @param index
+     */
     void mode(size_t index) override;
 
 

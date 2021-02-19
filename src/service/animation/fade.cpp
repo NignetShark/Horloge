@@ -2,7 +2,7 @@
 // Created by paul on 18/02/2021.
 //
 
-#include <exception/FatalException.hpp>
+#include <exception/fatal_exception.hpp>
 #include "service/animation/fade.hpp"
 
 bool animation::Fade::first_frame(LedMatrix *keyframe) {

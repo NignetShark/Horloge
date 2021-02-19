@@ -3,3 +3,15 @@
 //
 
 #include "display/display.hpp"
+
+void Display::save_state(LedMatrix *matrix) {
+    matrix->copy(&this->state);
+}
+
+void Display::load_state(LedMatrix *target) {
+    state.copy(target);
+}
+
+Display::Display() : state(true) {
+
+}

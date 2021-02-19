@@ -3,7 +3,7 @@
 //
 
 #include <service/animation/wave.hpp>
-#include <exception/FatalException.hpp>
+#include <exception/fatal_exception.hpp>
 #include "manager.hpp"
 
 Manager* Manager::instance;
@@ -31,9 +31,9 @@ Display &Manager::getDisplay() {
 }
 
 void Manager::stop() {
-    if(current_service) {
-        current_service->stop();
-        current_service = nullptr;
+    if(current_base_service) {
+        current_base_service->stop();
+        current_base_service = nullptr;
     }
 }
 
@@ -41,7 +41,7 @@ void Manager::start_clock() {
     stop();
     dial_mixer->setup(dial_coloration, clock_service);
     dial_mixer->start();
-    current_service = dial_mixer;
+    current_base_service = dial_mixer;
 }
 
 void Manager::start_animation() {
@@ -49,13 +49,13 @@ void Manager::start_animation() {
     animation::Wave::get().setup(led_color::WHITE);
     anim_service.setup(animation::Wave::get(), 0.1, 50);
     anim_service.start();
-    current_service = &anim_service;
+    current_base_service = &anim_service;
 }
 
 void Manager::start_ntp() {
     stop();
     ntp_service.start();
-    current_service = &ntp_service;
+    current_base_service = &ntp_service;
 }
 
 

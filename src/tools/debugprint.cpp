@@ -5,7 +5,7 @@
 #include <iostream>
 #include "tools/debugprint.hpp"
 
-void DebugPrint::print(std::string m, color_t c) {
+void DebugPrint::print(const std::string& m, color_t c) {
     std::cout << "\x1b[38;2;" << std::to_string(c.rgb.red) << ";"
                               << std::to_string(c.rgb.green) << ";"
                               << std::to_string(c.rgb.blue) << "m";
@@ -21,4 +21,10 @@ void DebugPrint::print(LedMatrix &m) {
         std::cout << "\n";
     }
     std::cout << std::endl;
+}
+
+void DebugPrint::print(const std::string& m, ColorTerm c) {
+    std::cout << "\033[" << c << "m";
+    std::cout << m;
+    std::cout << "\033[0m";
 }

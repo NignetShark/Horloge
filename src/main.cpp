@@ -4,13 +4,16 @@
 #include <service/coloration/dial_coloration.hpp>
 #include <service/timing/clock_service.hpp>
 #include <manager.hpp>
+#include <display/nixie_display.hpp>
 #include "tools/ledmatrix.hpp"
 #include "tools/ledcolor.hpp"
 #include "tools/debugprint.hpp"
 
 
 int main() {
+    //NixieDisplay display;
     TerminalDisplay display;
+
     Manager::create(display);
 
     Manager::get().start_ntp();

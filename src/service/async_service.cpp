@@ -2,7 +2,7 @@
 // Created by paul on 17/02/2021.
 //
 
-#include <exception/FatalException.hpp>
+#include <exception/fatal_exception.hpp>
 #include "service/async_service.hpp"
 
 void AsyncService::_start() {
@@ -20,5 +20,8 @@ void AsyncService::_stop() {
 
 void AsyncService::wait_ms(unsigned int delay) {
     std::this_thread::sleep_for(std::chrono::milliseconds(delay));
+}
 
+bool AsyncService::is_alive() const {
+    return keepAlive;
 }

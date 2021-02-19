@@ -8,14 +8,14 @@
 #include <mutex>
 #include "display.hpp"
 
+/**
+ * Display on a terminal using TRUE COLORS
+ */
 class TerminalDisplay : public Display {
 private:
     std::mutex mutex;
-    LedMatrix last;
 public:
     void display(LedMatrix &matrix) override;
-
-    void get(LedMatrix *target) override;
 };
 
 

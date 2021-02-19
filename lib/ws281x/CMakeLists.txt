@@ -13,4 +13,4 @@ add_library(ws2811 SHARED
 target_include_directories(ws2811 PRIVATE include)
 
 install(TARGETS ws2811
-        LIBRARY DESTINATION ./)
+        LIBRARY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})

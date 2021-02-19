@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include <exception/FatalException.hpp>
+#include <exception/fatal_exception.hpp>
 #include "sys/time.h"
 #include "service/timing/clock_service.hpp"
 #include "tools/timetools.hpp"
@@ -104,7 +104,7 @@ void ClockService::cascadeNumbersToTime(unsigned int delay_ms) {
 void ClockService::waitUntilNextSec() {
     struct timeval now;
     gettimeofday(&now, NULL);
-    wait_ms(1000 - now.tv_usec / 1000);
+    wait_ms(1005 - now.tv_usec / 1000); // Little extra to prevent rollback
 }
 
 bool ClockService::array_equals(uint8_t* array1, uint8_t* array2, size_t size) {
@@ -120,6 +120,10 @@ void ClockService::try_start() {
 
 void ClockService::try_stop() {
     this->stop();
+}
+
+bool ClockService::is_alive() {
+    return keepAlive;
 }
 
 

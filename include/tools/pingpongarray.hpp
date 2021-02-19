@@ -9,14 +9,30 @@
 #include "ledcolor.hpp"
 #include "settings.hpp"
 
+/**
+ * Array using the ping pong technic for a model 1 producer / 1 consumer
+ * @tparam T array type
+ * @tparam size array size
+ */
 template<class T, int size>
 class PingPongArray {
 private:
     T array1[size];
     T array2[size];
 
+    /**
+     * Pointer to the front array
+     */
     T* front;
+
+    /**
+     * Pointer to the back array
+     */
     T* back;
+
+    /**
+     * Mutex used to protect swap
+     */
     std::mutex mutex;
 
 public:
@@ -28,6 +44,10 @@ public:
     T* getFront();
     T* getBack();
 
+    /**
+     * Swap front and back.
+     * WARNING: Not protected by the mutex.
+     */
     void unsafe_swap();
 
 };

@@ -11,7 +11,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#include <exception/NTPException.hpp>
+#include <exception/ntp_exception.hpp>
 #include <iostream>
 #include <tools/timetools.hpp>
 #include <service/animation/wave.hpp>
@@ -35,7 +35,7 @@ void NTPService::run() {
             ok = true;
         } catch (NTPException exception) {
             err404(i);
-            chrono(10, led_color::YELLOW);
+            wait_chrono(10, led_color::YELLOW);
         }
     }
 
@@ -187,7 +187,7 @@ time_t NTPService::getNTPTime() {
 
 }
 
-void NTPService::chrono(uint8_t from, color_t color) {
+void NTPService::wait_chrono(uint8_t from, color_t color) {
     uint8_t result[DIAL_COUNT];
     uint8_t numbers[3] = {from, 0, 0};
     color_t colors[6] = {color, color, led_color::BLACK, led_color::BLACK, led_color::BLACK,
