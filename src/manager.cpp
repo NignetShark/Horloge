@@ -16,9 +16,9 @@ Manager::Manager(Display &display) : display(display), anim_service(), ntp_servi
     clock_service = new ClockService(*dial_mixer);
 }
 
-void Manager::create(Display &display) {
+Manager * Manager::create(Display &display) {
     if(instance != nullptr) throw FatalException("The manager was already initialized");
-    new Manager(display);
+    return new Manager(display);
 }
 
 Manager &Manager::get() {
@@ -26,7 +26,7 @@ Manager &Manager::get() {
     return *instance;
 }
 
-Display &Manager::getDisplay() {
+Display &Manager::get_display() {
     return display;
 }
 
@@ -59,12 +59,20 @@ void Manager::start_ntp() {
     current_base_service = nullptr;
 }
 
-Scheduler& Manager::getScheduler() {
+Scheduler& Manager::get_scheduler() {
     return scheduler;
 }
 
 void Manager::start_scheduler() {
     scheduler.start();
+}
+
+ColorInputInterface *Manager::get_color_input() {
+    if(current_base_service == dial_mixer) {
+        return dial_mixer;
+    } else {
+        return nullptr;
+    }
 }
 
 

@@ -16,7 +16,7 @@
 
 
 
-class DialMixer : public Service, public DialMixerInterface {
+class DialMixer : public Service, public DialMixerInterface, public ColorInputInterface {
 private:
     PingPongArray<color_t, DIAL_COUNT> colors;
     PingPongArray<uint8_t, DIAL_COUNT> digits;
@@ -47,6 +47,15 @@ public:
     color_t *get_color_array() override;
 
     uint8_t * get_digit_array() override;
+
+private:
+    void set_night_mode() override;
+
+    void set_day_mode() override;
+
+    void next_color_mode() override;
+
+    void previous_color_mode() override;
 
 
 };

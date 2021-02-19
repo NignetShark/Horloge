@@ -7,7 +7,7 @@
 #include "service/dial_mixer.hpp"
 
 
-DialMixer::DialMixer() : display(Manager::get().getDisplay()), digit_service(nullptr), coloration_service(nullptr) {
+DialMixer::DialMixer() : display(Manager::get().get_display()), digit_service(nullptr), coloration_service(nullptr) {
 }
 
 void DialMixer::setup(DialColoration *coloration, DigitsService *timing) {
@@ -90,6 +90,22 @@ color_t *DialMixer::get_color_array() {
 uint8_t * DialMixer::get_digit_array() {
     // WARNING: Only DigitsService thread can call this.
     return digits.getFront();
+}
+
+void DialMixer::set_night_mode() {
+    coloration_service->set_night_mode();
+}
+
+void DialMixer::set_day_mode() {
+    coloration_service->set_day_mode();
+}
+
+void DialMixer::next_color_mode() {
+    coloration_service->next_color_mode();
+}
+
+void DialMixer::previous_color_mode() {
+    coloration_service->previous_color_mode();
 }
 
 

@@ -11,7 +11,7 @@ int main() {
     //NixieDisplay display;
     TerminalDisplay display;
 
-    Manager::create(display); // Create the manager
+    Manager* manager = Manager::create(display); // Create the manager
 
     time_t now = time(0), day, night;
     tm* time = localtime(&now);
@@ -25,19 +25,25 @@ int main() {
     day = mktime(time);
 
     DayNightTask day_night_task(day, night);
-    Manager::get().getScheduler().append(&day_night_task);
-    Manager::get().start_scheduler();
+    manager->get_scheduler().append(&day_night_task);
+    manager->start_scheduler();
 
-    Manager::get().start_ntp();
+    //Manager::get().start_ntp();
 
-    Manager::get().start_animation();
+    //Manager::get().start_animation();
+
+
+    manager->start_clock();
 
     std::this_thread::sleep_for(std::chrono::seconds(5));
 
-    Manager::get().start_clock();
+    manager->get_color_input()->set_night_mode();
 
     std::this_thread::sleep_for(std::chrono::seconds(5));
 
+    manager->get_color_input()->set_day_mode();
+
+    std::this_thread::sleep_for(std::chrono::seconds(5));
     return 0;
 }
 

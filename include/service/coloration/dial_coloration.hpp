@@ -40,12 +40,9 @@ public:
 
     void run() override;
 
-    /**
-     * Change the mode
-     * @param index
-     */
-    void mode(size_t index) override;
 
+private:
+    unsigned int get_night_mode() override;
 
 };
 

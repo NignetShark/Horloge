@@ -15,7 +15,7 @@ private:
     /**
      * Current mode
      */
-    size_t index;
+    size_t index, saved_index;
 
     /**
      * Number of modes
@@ -32,30 +32,38 @@ public:
     Selector(size_t size, size_t default_index);
     
     /**
-     * Call next mode
+     * Call next_state mode
      */
-    void next();
+    void next_state();
 
     /**
-     * Call previous mode
+     * Set mode
      */
-    void previous();
+     void set_mode(unsigned int mode);
 
     /**
-     * Call the current mode
+     * Call previous_state mode
      */
-    void current();
+    void previous_state();
 
     /**
-     * Called before any change
+     * Save the current index
      */
-    virtual void beforeChanging() = 0;
+    void save_state();
 
     /**
-     * Called when a mode is selected
-     * @param index
+     * Load the saved index
      */
-    virtual void mode(size_t index) = 0;
+    void load_state();
+
+    /**
+     * Called to apply a change
+     */
+    virtual void mode_changed() = 0;
+
+    unsigned int get_current_mode();
+
+
 };
 
 

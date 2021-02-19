@@ -21,7 +21,7 @@ void AnimationService::setup(Animator &animator, float increment, unsigned int d
 void AnimationService::run() {
     if(animator == nullptr) throw FatalException("Animation not defined");
 
-    Display& display = Manager::get().getDisplay();
+    Display& display = Manager::get().get_display();
 
     LedMatrix key_frame_1;
     LedMatrix key_frame_2;

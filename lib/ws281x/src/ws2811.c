@@ -439,7 +439,7 @@ static int setup_pcm(ws2811_t *ws2811)
     // the odds of a DMA priority boost are extremely low.
 
     pcm->cs = RPI_PCM_CS_EN;            // Enable PCM hardware
-    pcm->mode = (RPI_PCM_MODE_FLEN(31) | RPI_PCM_MODE_FSLEN(1));
+    pcm->_set_mode = (RPI_PCM_MODE_FLEN(31) | RPI_PCM_MODE_FSLEN(1));
                 // Framelength 32, clock enabled, frame sync pulse
     pcm->txc = RPI_PCM_TXC_CH1WEX | RPI_PCM_TXC_CH1EN | RPI_PCM_TXC_CH1POS(0) | RPI_PCM_TXC_CH1WID(8);
                // Single 32-bit channel
@@ -1221,7 +1221,7 @@ ws2811_return_t  ws2811_render(ws2811_t *ws2811)
         }
     }
 
-    // Wait for any previous DMA operation to complete.
+    // Wait for any previous_state DMA operation to complete.
     if ((ret = ws2811_wait(ws2811)) != WS2811_SUCCESS)
     {
         return ret;

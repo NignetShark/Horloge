@@ -44,7 +44,7 @@ public:
      * Create the manager
      * @param display use to show LedMatrix
      */
-    static void create(Display& display);
+    static Manager * create(Display& display);
 
     /**
      * Return the current instance
@@ -56,14 +56,20 @@ public:
      * Return display used to show LedMatrix
      * @return display
      */
-    Display& getDisplay();
+    Display& get_display();
 
-    Scheduler& getScheduler();
+    /**
+     * Return the scheduler
+     * @return scheduler
+     */
+    Scheduler& get_scheduler();
 
     void start_clock();
     void start_animation();
     void start_ntp();
     void start_scheduler();
+
+    ColorInputInterface* get_color_input();
 
     /**
      * Stop the current base process

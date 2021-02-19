@@ -28,7 +28,7 @@ public:
     virtual bool first_frame(LedMatrix* keyframe) = 0;
 
     /**
-     * Return the next frame
+     * Return the next_state frame
      * @param keyframe new frame
      * @param previous last frame if necessary
      * @return false if the animation is terminated

@@ -158,7 +158,7 @@ time_t NTPService::get_NTP_Time() {
 
     bcopy((char *) server->h_addr, (char *) &serv_addr.sin_addr.s_addr, server->h_length);
 
-    // Convert the port number integer to network big-endian style and save it to the server address structure.
+    // Convert the port number integer to network big-endian style and save_state it to the server address structure.
 
     serv_addr.sin_port = htons(NTP_PORT);
 

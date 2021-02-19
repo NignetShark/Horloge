@@ -38,9 +38,11 @@ void ClockService::run() {
             uint8_t result[DIAL_COUNT];
             TimeTools::time2digits(result, tm_after);
             cascadeDigits(result, 50);
+
+            target = mixer.get_digit_array();
         }
 
-        waitUntilNextSec();
+        wait_until_next_sec();
     }
 }
 
@@ -75,9 +77,10 @@ void ClockService::cascadeNumbersToTime(unsigned int delay_ms) {
     TimeTools::time2numbers(currentNum, local_tm);
     TimeTools::digits2numbers(targetNum, target);
 
-    wait_ms(delay_ms);
 
     while(!array_equals(targetNum, currentNum, 3) and keepAlive){
+
+        wait_ms(delay_ms);
 
         for(uint8_t i = 0; i < 3; i++){
             if(targetNum[i] < currentNum[i]){
@@ -95,16 +98,14 @@ void ClockService::cascadeNumbersToTime(unsigned int delay_ms) {
         TimeTools::numbers2digits(target, targetNum);
 
         target = mixer.paint_digits();
-
-        wait_ms(delay_ms);
     }
 
 }
 
-void ClockService::waitUntilNextSec() {
+void ClockService::wait_until_next_sec() {
     struct timeval now;
     gettimeofday(&now, NULL);
-    wait_ms(1005 - now.tv_usec / 1000); // Little extra to prevent rollback
+    wait_ms(1010 - now.tv_usec / 1000); // Little extra to prevent rollback
 }
 
 bool ClockService::array_equals(uint8_t* array1, uint8_t* array2, size_t size) {

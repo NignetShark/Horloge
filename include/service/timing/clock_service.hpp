@@ -15,9 +15,9 @@
 class ClockService : public DigitsService, AsyncService {
 private:
     /**
-     * Wait until the next sec
+     * Wait until the next_state sec
      */
-    void waitUntilNextSec();
+    void wait_until_next_sec();
 
     /**
      * Compare two array
