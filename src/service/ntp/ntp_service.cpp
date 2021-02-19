@@ -18,6 +18,7 @@
 
 #define NTP_TIMESTAMP_DELTA 2208988800ull
 
+
 #define LI(packet)   (uint8_t) ((packet.li_vn_mode & 0xC0) >> 6) // (li   & 11 000 000) >> 6
 #define VN(packet)   (uint8_t) ((packet.li_vn_mode & 0x38) >> 3) // (vn   & 00 111 000) >> 3
 #define MODE(packet) (uint8_t) ((packet.li_vn_mode & 0x07) >> 0) // (mode & 00 000 111) >> 0
@@ -27,13 +28,24 @@ NTPService::NTPService(AnimationService &anim_service) : anim_service(anim_servi
 }
 
 void NTPService::run() {
-    time_t txTm;
     bool ok = false;
-    for(int i = 0; i < 2; i++) {
+    time_t txTm;
+    LedMatrix m(true);
+
+    for(int i = 0; i < NTP_ATTEMPT; i++) {
+
+        // Start waiting animation
+        animation::Wave::get().setup(led_color::YELLOW);
+        anim_service.setup(animation::Wave::get(), 0.1, 50);
+        anim_service.start();
+
         try {
-            txTm = getNTPTime();
+            txTm = get_NTP_Time();
             ok = true;
+            anim_service.stop();
+            break;
         } catch (NTPException exception) {
+            anim_service.stop();
             err404(i);
             wait_chrono(10, led_color::YELLOW);
         }
@@ -65,7 +77,7 @@ void NTPService::err404(unsigned int attempt) {
     anim_service.sync_run();
 }
 
-time_t NTPService::getNTPTime() {
+time_t NTPService::get_NTP_Time() {
     /*
      *
      * (C) 2014 David Lettier.
@@ -215,5 +227,6 @@ void NTPService::success() {
     wait_ms(5000);
     anim_service.stop();
 }
+
 
 

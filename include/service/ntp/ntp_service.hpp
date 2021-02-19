@@ -9,6 +9,7 @@
 
 #define HOST_NAME "fr.pool.ntp.org"
 #define NTP_PORT 123
+#define NTP_ATTEMPT 10
 
 /**
  * NTP Service to get right time
@@ -41,7 +42,7 @@ private:
      * Get the time from a NTP server
      * @return
      */
-    time_t getNTPTime();
+    time_t get_NTP_Time();
 
 public:
     NTPService(AnimationService& anim_service);
