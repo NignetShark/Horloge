@@ -67,14 +67,14 @@ void NTPService::err404(unsigned int attempt) {
 
     animation::Fade::get().setup(&m404);
     anim_service.setup(animation::Fade::get(), 0.02, 50);
-    anim_service.sync_run();
+    anim_service.start_sync();
 
     wait_ms(500);
 
     m404.clear();
     animation::Fade::get().setup(&m404);
     anim_service.setup(animation::Fade::get(), 0.02, 50);
-    anim_service.sync_run();
+    anim_service.start_sync();
 }
 
 time_t NTPService::get_NTP_Time() {
@@ -213,7 +213,7 @@ void NTPService::wait_chrono(uint8_t from, color_t color) {
 
         animation::Fade::get().setup(&m);
         anim_service.setup(animation::Fade::get(), 0.025, 25);
-        anim_service.sync_run();
+        anim_service.start_sync();
         wait_ms(500);
 
         numbers[0]--;

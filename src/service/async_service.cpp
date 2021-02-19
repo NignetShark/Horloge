@@ -11,6 +11,14 @@ void AsyncService::_start() {
     service_thread = std::move(std::thread(&AsyncService::run, this));
 }
 
+void AsyncService::_start_sync() {
+    if(keepAlive) throw FatalException("Service already running.");
+    keepAlive = true;
+    run();
+    keepAlive = false;
+}
+
+
 void AsyncService::_stop() {
     if(keepAlive) {
         keepAlive = false;
@@ -25,3 +33,4 @@ void AsyncService::wait_ms(unsigned int delay) {
 bool AsyncService::is_alive() const {
     return keepAlive;
 }
+

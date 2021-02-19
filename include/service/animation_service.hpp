@@ -43,10 +43,6 @@ public:
      */
     void setup(Animator &animator, float increment, unsigned int delay);
 
-    /**
-     * Run this service as a synchronous service (used inside an asynchronous service like NTP).
-     */
-    void sync_run();
 };
 
 

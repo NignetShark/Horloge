@@ -22,3 +22,9 @@ void Service::stop() {
     this->_stop();
     running.erase(this);
 }
+
+void Service::start_sync() {
+    running.insert(this);
+    this->_start_sync();
+    running.erase(this);
+}

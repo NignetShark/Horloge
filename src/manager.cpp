@@ -54,8 +54,9 @@ void Manager::start_animation() {
 
 void Manager::start_ntp() {
     stop();
-    ntp_service.start();
     current_base_service = &ntp_service;
+    ntp_service.start_sync();
+    current_base_service = nullptr;
 }
 
 

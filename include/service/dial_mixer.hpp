@@ -35,6 +35,11 @@ public:
     void _start() override;
     void _stop() override;
 
+private:
+    void _start_sync() override;
+
+public:
+
 
     color_t* paint_color() override;
     uint8_t* paint_digits() override;

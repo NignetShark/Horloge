@@ -11,14 +11,13 @@
 
 
 int main() {
+    /* Select a display */
     //NixieDisplay display;
     TerminalDisplay display;
 
-    Manager::create(display);
+    Manager::create(display); // Create the manager
 
     Manager::get().start_ntp();
-
-    std::this_thread::sleep_for(std::chrono::seconds(5));
 
     Manager::get().start_animation();
 

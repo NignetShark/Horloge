@@ -62,11 +62,5 @@ void AnimationService::run() {
     keepAlive = false;
 }
 
-void AnimationService::sync_run() {
-    if(keepAlive) throw FatalException("Sync animation cannot be used when the service is running");
-    keepAlive = true;
-    run();
-}
-
 
 

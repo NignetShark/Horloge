@@ -29,6 +29,11 @@ public:
     void _start() override;
     void _stop() override;
 
+private:
+    void _start_sync() override;
+
+public:
+
     /**
      * Is the service running ?
      * @return true if running.

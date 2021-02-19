@@ -7,11 +7,11 @@
 #include "service/dial_mixer.hpp"
 
 
-DialMixer::DialMixer() : display(Manager::get().getDisplay()) {
+DialMixer::DialMixer() : display(Manager::get().getDisplay()), digit_service(nullptr), coloration_service(nullptr) {
 }
 
 void DialMixer::setup(DialColoration *coloration, DigitsService *timing) {
-    if(this->digit_service != nullptr && coloration_service != nullptr) {
+    if(this->digit_service != nullptr && this->coloration_service != nullptr) {
         if(coloration->is_alive() || digit_service->is_alive()) {
             throw FatalException("Cannot setup dial mixer while coloration or digits is running");
         }
@@ -24,6 +24,10 @@ void DialMixer::_start() {
     if(digit_service == nullptr || coloration_service == nullptr) throw FatalException("No setup for dual mixer");
     coloration_service->start();
     digit_service->try_start();
+}
+
+void DialMixer::_start_sync() {
+    throw FatalException("DialMixer cannot be run as a sync process");
 }
 
 void DialMixer::_stop() {
@@ -87,7 +91,6 @@ uint8_t * DialMixer::get_digit_array() {
     // WARNING: Only DigitsService thread can call this.
     return digits.getFront();
 }
-
 
 
 
