@@ -30,6 +30,8 @@ private:
 public:
     DialMixer();
 
+    uint8_t *get_prev_digit_array() override;
+
     void setup(DialColoration *coloration, DigitsService *timing);
 
     void _start() override;

@@ -108,6 +108,10 @@ void DialMixer::previous_color_mode() {
     coloration_service->previous_color_mode();
 }
 
+uint8_t *DialMixer::get_prev_digit_array() {
+    return digits.getBack();
+}
+
 
 
 

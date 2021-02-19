@@ -4,22 +4,24 @@
 
 #include "tools/timetools.hpp"
 
-void TimeTools::time2digits(uint8_t *result, tm *tmps) {
-    div_t value = number2digits(tmps->tm_hour);
+void TimeTools::time2digits(uint8_t *result, time_t time) {
+    tm* time_tm = localtime(&time);
+    div_t value = number2digits(time_tm->tm_hour);
     result[0] = value.quot;
     result[1] = value.rem;
-    value = number2digits(tmps->tm_min);
+    value = number2digits(time_tm->tm_min);
     result[2] = value.quot;
     result[3] = value.rem;
-    value = number2digits(tmps->tm_sec);
+    value = number2digits(time_tm->tm_sec);
     result[4] = value.quot;
     result[5] = value.rem;
 }
 
-void TimeTools::time2numbers(uint8_t *result, tm *tmps) {
-    result[0] = tmps->tm_hour;
-    result[1] = tmps->tm_min;
-    result[2] = tmps->tm_sec;
+void TimeTools::time2numbers(uint8_t *result, time_t time) {
+    tm* time_tm = localtime(&time);
+    result[0] = time_tm->tm_hour;
+    result[1] = time_tm->tm_min;
+    result[2] = time_tm->tm_sec;
 }
 
 void TimeTools::numbers2digits(uint8_t *result, uint8_t *numbers) {

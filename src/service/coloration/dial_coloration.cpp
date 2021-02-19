@@ -23,7 +23,7 @@ void DialColoration::run() {
         case RAINBOW:
         {
             float hueOffsets[6] = {10, 20, 30, 40, 50, 60};
-            movingRainbow(hueOffsets, 100);
+            movingRainbow(hueOffsets, 10);
             break;
         }
         case RESTRICTED_RAINBOW:

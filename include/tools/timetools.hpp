@@ -23,16 +23,16 @@ public:
     /**
      * Convert a time to an array of 6 digits
      * @param result
-     * @param tmps time
+     * @param time time
      */
-    static void time2digits(uint8_t result[DIAL_COUNT], std::tm* tmps);
+    static void time2digits(uint8_t result[DIAL_COUNT], time_t time);
 
     /**
      * Convert a time to an array of 3 numbers
      * @param result
-     * @param tmps time
+     * @param time time
      */
-    static void time2numbers(uint8_t *result, tm *tmps);
+    static void time2numbers(uint8_t *result, time_t time);
 
     /**
      * Convert an array of 3 numbers to an array of 6 digits

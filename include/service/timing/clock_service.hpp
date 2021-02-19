@@ -38,7 +38,7 @@ private:
      * Animation when 59sec is reached
      * @param delay_ms between each frame
      */
-    void cascadeDigits(uint8_t *toDigits, unsigned int delay_ms);
+    void cascadeDigits(uint8_t *to_digits, unsigned int delay_ms);
 
     void run() override;
 public:

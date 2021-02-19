@@ -44,6 +44,8 @@ public:
      * @return true if running
      */
     virtual bool is_alive() = 0;
+
+    static void print_digits(uint8_t* digits);
 };
 
 

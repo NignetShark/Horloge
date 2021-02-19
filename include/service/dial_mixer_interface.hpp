@@ -23,6 +23,14 @@ public:
     virtual color_t* get_color_array() = 0;
 
     /**
+     * Get the pointer of the previous digit array
+     * WARNING: Only the digits thread can call this function
+     * WARNING: For read only
+     * @return digits array
+     */
+    virtual uint8_t * get_prev_digit_array() = 0;
+
+    /**
      * Get the pointer of the digit array
      * WARNING: Only the digits thread can call this function
      * @return digits array
