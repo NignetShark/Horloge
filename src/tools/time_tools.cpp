@@ -46,6 +46,11 @@ __inline__ div_t TimeTools::number2digits(uint8_t number) {
     return div(number, 10);
 }
 
+std::string TimeTools::time2str(time_t time) {
+    std::string time_str = std::string(ctime(&time));
+    return time_str.substr(0, time_str.length() - 1);
+}
+
 
 
 

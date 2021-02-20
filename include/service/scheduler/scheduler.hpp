@@ -13,6 +13,9 @@
 
 class Scheduler : public AsyncService {
 private:
+    /**
+     * Map of all scheduled task.
+     */
     std::map<time_t, TaskScheduled*> tasks;
     std::mutex mutex;
 
@@ -22,6 +25,10 @@ private:
 public:
     Scheduler();
 
+    /**
+     * Add a task to the scheduler
+     * @param task
+     */
     void append(TaskScheduled *task);
 };
 

@@ -10,13 +10,12 @@
 class DayNightTask : public TaskScheduled {
     time_t day, night;
 
-    void recompute_date();
+    void recompute_date(time_t now);
 public:
     DayNightTask(time_t day, time_t night);
 
     bool time_is_up(time_t handled_date) override;
-
-    void reschedule(time_t &new_date) override;
+    void reschedule(time_t &new_date, time_t &handled_date) override;
 };
 
 

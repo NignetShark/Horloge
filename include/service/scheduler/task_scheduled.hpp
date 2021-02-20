@@ -10,8 +10,19 @@
 
 class TaskScheduled {
 public:
+    /**
+     * Function called when time is up
+     * @param handled_date wake up time
+     * @return true if need a reschedule.
+     */
     virtual bool time_is_up(time_t handled_date) = 0;
-    virtual void reschedule(time_t &new_date) = 0;
+
+    /**
+     * Reschedule a task
+     * @param new_date the date of the future wake up
+     * @param handled_date the date of the last wake up
+     */
+    virtual void reschedule(time_t &new_date, time_t &handled_date) = 0;
 private:
 };
 

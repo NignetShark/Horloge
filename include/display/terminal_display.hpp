@@ -21,6 +21,7 @@ private:
     __gnu_cxx::stdio_filebuf<char>* file_buf;
     std::ostream* output;
     int terminal_pt, xterm_fd;
+
     std::mutex mutex;
 
 public:

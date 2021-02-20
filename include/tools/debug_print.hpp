@@ -11,6 +11,7 @@
 #include "led_matrix.hpp"
 
 typedef enum {
+    NO_COLOR = 0,
     BLUE = 34,
     CYAN = 36,
     OK = 32,

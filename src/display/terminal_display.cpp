@@ -10,6 +10,7 @@
 #include <exception/fatal_exception.hpp>
 #include <sstream>
 #include <cstring>
+#include <tools/logging.hpp>
 #include "display/terminal_display.hpp"
 #include "tools/debug_print.hpp"
 
@@ -28,7 +29,7 @@ TerminalDisplay::TerminalDisplay() : terminal_pt(-1), xterm_fd(-1), output(nullp
     if (grantpt(terminal_pt) == -1) throw FatalException("Could not get pseudo terminal device name");
     if (unlockpt(terminal_pt) == -1) throw FatalException("Could not get pseudo terminal device name");
 
-    DebugPrint::print("TTY used : " + std::string(pt_name) + "\n", ColorTerm::BLUE, std::cout);
+    Logging::get().info("TTY used for display : " + std::string(pt_name));
 
     std::string command = "gnome-terminal -- " + std::string(TTYLOG_PATH) + " -d " + std::string(pt_name);
     system(command.c_str());

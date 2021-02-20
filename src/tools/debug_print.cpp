@@ -24,7 +24,11 @@ void DebugPrint::print(LedMatrix &m, std::ostream &output) {
 }
 
 void DebugPrint::print(const std::string &m, ColorTerm c, std::ostream &output) {
-    output << "\033[" << c << "m";
-    output << m;
-    output << "\033[0m";
+    if(c == NO_COLOR) {
+        output << m;
+    } else {
+        output << "\033[" << c << "m";
+        output << m;
+        output << "\033[0m";
+    }
 }

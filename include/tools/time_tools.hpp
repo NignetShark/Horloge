@@ -8,6 +8,7 @@
 #include <ctime>
 #include <cstdint>
 #include <cstdlib>
+#include <string>
 #include "settings.hpp"
 
 class TimeTools {
@@ -47,6 +48,8 @@ public:
      * @param numbers
      */
     static void digits2numbers(uint8_t *result, uint8_t *digits);
+
+    static std::string time2str(time_t time);
 };
 
 

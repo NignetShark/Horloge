@@ -28,6 +28,7 @@ int main() {
     manager->get_scheduler().append(&day_night_task);
     manager->start_scheduler();
 
+
     Manager::get().start_ntp();
 
     Manager::get().start_animation();
@@ -35,15 +36,8 @@ int main() {
 
     manager->start_clock();
 
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+    std::this_thread::sleep_for(std::chrono::seconds(25));
 
-    manager->get_color_input()->set_night_mode();
-
-    std::this_thread::sleep_for(std::chrono::seconds(5));
-
-    manager->get_color_input()->set_day_mode();
-
-    std::this_thread::sleep_for(std::chrono::seconds(5));
     return 0;
 }
 

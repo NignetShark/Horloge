@@ -15,6 +15,7 @@
 #include <iostream>
 #include <tools/time_tools.hpp>
 #include <service/animation/wave.hpp>
+#include <tools/logging.hpp>
 
 #define NTP_TIMESTAMP_DELTA 2208988800ull
 
@@ -30,7 +31,8 @@ NTPService::NTPService(AnimationService &anim_service) : anim_service(anim_servi
 void NTPService::run() {
     bool ok = false;
     time_t txTm;
-    LedMatrix m(true);
+
+    Logging::get().write("NTP synchronization started");
 
     for(int i = 0; i < NTP_ATTEMPT; i++) {
 
@@ -44,11 +46,8 @@ void NTPService::run() {
         try {
             txTm = get_NTP_Time();
 
-            if(txTm != time(0)) {
-                std::cout << "Need adjustment" << std::endl;
-            } else {
-                std::cout << "No need adjustment" << std::endl;
-            }
+            time_t delta = txTm - time(0);
+            Logging::get().write("NTP delta time : " + std::to_string(delta));
 
             ok = true;
             anim_service.stop();
@@ -61,18 +60,23 @@ void NTPService::run() {
     }
 
     if(ok) {
-        std::cout << "Time " << ctime((const time_t *) &txTm) << std::endl;
+        Logging::get().info("NTP date : " + TimeTools::time2str(txTm));
         success();
+    } else {
+        Logging::get().error("NTP synchronization failed");
     }
 
 }
 
 void NTPService::err404(unsigned int attempt) {
+    Logging::get().warning("NTP synchronization failed (attempt " + std::to_string(attempt) + ")");
+
     LedMatrix m404(true);
     m404.set(attempt, 0, led_color::RED);
     m404.set(4, 3, led_color::RED);
     m404.set(0, 4, led_color::RED);
     m404.set(4, 5, led_color::RED);
+
 
     animation::Fade::get().setup(&m404);
     anim_service.setup(animation::Fade::get(), 0.02, 50);
