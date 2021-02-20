@@ -10,6 +10,8 @@
 #include <ext/stdio_filebuf.h>
 #include "display.hpp"
 
+#define TTYLOG_PATH "/usr/sbin/ttylog"
+
 /**
  * Display on a gnome-terminal using TRUE COLORS
  * WARNING: ttylog must be installed.

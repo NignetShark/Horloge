@@ -30,7 +30,7 @@ TerminalDisplay::TerminalDisplay() : terminal_pt(-1), xterm_fd(-1), output(nullp
 
     DebugPrint::print("TTY used : " + std::string(pt_name) + "\n", ColorTerm::BLUE, std::cout);
 
-    std::string command = "gnome-terminal -- " + TTYLOG_PATH + " -d " + std::string(pt_name);
+    std::string command = "gnome-terminal -- " + std::string(TTYLOG_PATH) + " -d " + std::string(pt_name);
     system(command.c_str());
 
     file_buf = new __gnu_cxx::stdio_filebuf<char>(terminal_pt, std::ios::out); // 1
