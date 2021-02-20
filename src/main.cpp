@@ -35,7 +35,7 @@ int main() {
 
     manager->start_clock();
 
-    std::this_thread::sleep_for(std::chrono::seconds(50));
+    std::this_thread::sleep_for(std::chrono::seconds(5));
 
     manager->get_color_input()->set_night_mode();
 

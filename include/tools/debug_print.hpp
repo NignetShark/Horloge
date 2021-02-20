@@ -24,9 +24,9 @@ typedef enum {
 class DebugPrint {
 private:
 public:
-    static void print(const std::string& m, ColorTerm c);
-    static void print(const std::string& m, color_t c);
-    static void print(LedMatrix& m);
+    static void print(const std::string &m, ColorTerm c, std::ostream &output);
+    static void print(const std::string &m, color_t c, std::ostream &output);
+    static void print(LedMatrix &m, std::ostream &output);
 
 private:
 };

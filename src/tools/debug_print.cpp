@@ -5,26 +5,26 @@
 #include <iostream>
 #include "tools/debug_print.hpp"
 
-void DebugPrint::print(const std::string& m, color_t c) {
-    std::cout << "\x1b[38;2;" << std::to_string(c.rgb.red) << ";"
+void DebugPrint::print(const std::string &m, color_t c, std::ostream &output) {
+    output << "\x1b[38;2;" << std::to_string(c.rgb.red) << ";"
                               << std::to_string(c.rgb.green) << ";"
                               << std::to_string(c.rgb.blue) << "m";
-    std::cout << m;
-    std::cout << "\x1b[0m";
+    output << m;
+    output << "\x1b[0m";
 }
 
-void DebugPrint::print(LedMatrix &m) {
+void DebugPrint::print(LedMatrix &m, std::ostream &output) {
     for(int digit = 0; digit < DIGITS_COUNT; digit++) {
         for(int dial = 0; dial < DIAL_COUNT; dial++) {
-            DebugPrint::print(" " + std::to_string(digit) +  " ", m.get(digit, dial));
+            DebugPrint::print(" " + std::to_string(digit) + " ", m.get(digit, dial), output);
         }
-        std::cout << "\n";
+        output << "\n";
     }
-    std::cout << std::endl;
+    output << std::endl;
 }
 
-void DebugPrint::print(const std::string& m, ColorTerm c) {
-    std::cout << "\033[" << c << "m";
-    std::cout << m;
-    std::cout << "\033[0m";
+void DebugPrint::print(const std::string &m, ColorTerm c, std::ostream &output) {
+    output << "\033[" << c << "m";
+    output << m;
+    output << "\033[0m";
 }

@@ -15,12 +15,13 @@ HardwareFailure::HardwareFailure(std::string what, bool warning, unsigned int re
 
 void HardwareFailure::report(ws2811_return_t ret) {
     if(warning) {
-        DebugPrint::print(what + " (" + ws2811_get_return_t_str(ret) + ")", WARNING);
+        DebugPrint::print(what + " (" + ws2811_get_return_t_str(ret) + ")", WARNING, std::cerr);
     } else {
         if(remaining == 0) {
             throw FatalException(what + " (" + ws2811_get_return_t_str(ret) + ")");
         } else {
-            DebugPrint::print("[" + std::to_string(remaining) + "] " + what + " (" + ws2811_get_return_t_str(ret) + ")", FAIL);
+            DebugPrint::print("[" + std::to_string(remaining) + "] " + what + " (" + ws2811_get_return_t_str(ret) + ")",
+                              FAIL, std::cerr);
             std::cout << std::endl;
             remaining--;
         }
