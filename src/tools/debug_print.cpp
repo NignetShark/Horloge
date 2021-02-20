@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "tools/debugprint.hpp"
+#include "tools/debug_print.hpp"
 
 void DebugPrint::print(const std::string& m, color_t c) {
     std::cout << "\x1b[38;2;" << std::to_string(c.rgb.red) << ";"

@@ -6,8 +6,8 @@
 #define HORLOGE_DIAL_COLORATION_HPP
 
 
-#include <tools/ledcolor.hpp>
-#include "tools/pingpongarray.hpp"
+#include <tools/led_color.hpp>
+#include "tools/ping_pong_array.hpp"
 #include "service/coloration_service.hpp"
 
 typedef enum {

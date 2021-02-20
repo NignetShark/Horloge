@@ -13,7 +13,7 @@
 #include <netdb.h>
 #include <exception/ntp_exception.hpp>
 #include <iostream>
-#include <tools/timetools.hpp>
+#include <tools/time_tools.hpp>
 #include <service/animation/wave.hpp>
 
 #define NTP_TIMESTAMP_DELTA 2208988800ull
@@ -39,8 +39,17 @@ void NTPService::run() {
         anim_service.setup(animation::Wave::get(), 0.1, 50);
         anim_service.start();
 
+        wait_until(time(0) + 1);
+
         try {
             txTm = get_NTP_Time();
+
+            if(txTm != time(0)) {
+                std::cout << "Need adjustment" << std::endl;
+            } else {
+                std::cout << "No need adjustment" << std::endl;
+            }
+
             ok = true;
             anim_service.stop();
             break;

@@ -2,7 +2,7 @@
 // Created by paul on 17/02/2021.
 //
 
-#include "tools/ledcolor.hpp"
+#include "tools/led_color.hpp"
 
 void led_color::LERP(color_t *target, const color_t *from, const color_t *to, float t, uint8_t end, uint8_t start) {
     for(uint8_t i = start; i < end; i++) {

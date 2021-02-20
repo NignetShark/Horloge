@@ -7,7 +7,7 @@
 
 
 #include "service/digits_service.hpp"
-#include "tools/pingpongarray.hpp"
+#include "tools/ping_pong_array.hpp"
 
 /**
  * Service used to manage digits with the aim to show the time

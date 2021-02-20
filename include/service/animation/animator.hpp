@@ -5,7 +5,7 @@
 #ifndef HORLOGE_ANIMATOR_HPP
 #define HORLOGE_ANIMATOR_HPP
 
-#include "tools/ledmatrix.hpp"
+#include "tools/led_matrix.hpp"
 
 /**
  * Abstract class of any animation

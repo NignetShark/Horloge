@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <iostream>
 #include "display/terminal_display.hpp"
-#include "tools/debugprint.hpp"
+#include "tools/debug_print.hpp"
 
 void TerminalDisplay::display(LedMatrix &matrix) {
     mutex.lock();

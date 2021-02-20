@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include <tools/debugprint.hpp>
+#include <tools/debug_print.hpp>
 #include <utility>
 #include <exception/fatal_exception.hpp>
 #include "exception/hardware_failure.hpp"

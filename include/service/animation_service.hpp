@@ -8,7 +8,7 @@
 #include <service/animation/animator.hpp>
 #include "display/display.hpp"
 #include "async_service.hpp"
-#include "tools/ledmatrix.hpp"
+#include "tools/led_matrix.hpp"
 
 /**
  * Service use to show an animation

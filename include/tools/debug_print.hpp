@@ -2,13 +2,13 @@
 // Created by paul on 17/02/2021.
 //
 
-#ifndef HORLOGE_DEBUGPRINT_HPP
-#define HORLOGE_DEBUGPRINT_HPP
+#ifndef HORLOGE_DEBUG_PRINT_HPP
+#define HORLOGE_DEBUG_PRINT_HPP
 
 
 #include <string>
-#include "tools/ledcolor.hpp"
-#include "ledmatrix.hpp"
+#include "tools/led_color.hpp"
+#include "led_matrix.hpp"
 
 typedef enum {
     BLUE = 34,
@@ -32,4 +32,4 @@ private:
 };
 
 
-#endif //HORLOGE_DEBUGPRINT_HPP
+#endif //HORLOGE_DEBUG_PRINT_HPP

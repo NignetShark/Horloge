@@ -5,7 +5,7 @@
 #include <cstdint>
 #include "service/animation/wave.hpp"
 #include "tools/settings.hpp"
-#include "tools/ledmatrix.hpp"
+#include "tools/led_matrix.hpp"
 
 namespace animation {
 

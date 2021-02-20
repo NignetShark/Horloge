@@ -9,9 +9,9 @@
 #include "service/coloration/dial_coloration.hpp"
 #include "service/timing/clock_service.hpp"
 
-#include <tools/pingpongarray.hpp>
+#include <tools/ping_pong_array.hpp>
 #include <display/display.hpp>
-#include "tools/ledmatrix.hpp"
+#include "tools/led_matrix.hpp"
 #include "dial_mixer_interface.hpp"
 
 

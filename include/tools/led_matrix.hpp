@@ -2,11 +2,11 @@
 // Created by paul on 17/02/2021.
 //
 
-#ifndef HORLOGE_LEDMATRIX_HPP
-#define HORLOGE_LEDMATRIX_HPP
+#ifndef HORLOGE_LED_MATRIX_HPP
+#define HORLOGE_LED_MATRIX_HPP
 
 #include <cstdint>
-#include "tools/ledcolor.hpp"
+#include "tools/led_color.hpp"
 #include "tools/settings.hpp"
 
 
@@ -88,6 +88,6 @@ public:
     const color_t *getMatrix() const;
 };
 
-#endif //HORLOGE_LEDMATRIX_HPP
+#endif //HORLOGE_LED_MATRIX_HPP
 
 

@@ -6,7 +6,7 @@
 #define HORLOGE_DISPLAY_HPP
 
 
-#include <tools/ledmatrix.hpp>
+#include <tools/led_matrix.hpp>
 
 /**
  * Display abstraction with the aim to show a LedMatrix

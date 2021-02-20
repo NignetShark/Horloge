@@ -5,7 +5,7 @@
 #include <cstring>
 #include <algorithm>
 #include <iostream>
-#include "tools/ledmatrix.hpp"
+#include "tools/led_matrix.hpp"
 
 static uint8_t LOOKUP_INDEXES[DIGITS_COUNT][DIAL_COUNT];  // Look up table use to match the corresponding
 

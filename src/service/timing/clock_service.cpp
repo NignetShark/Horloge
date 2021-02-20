@@ -6,7 +6,7 @@
 #include <exception/fatal_exception.hpp>
 #include "sys/time.h"
 #include "service/timing/clock_service.hpp"
-#include "tools/timetools.hpp"
+#include "tools/time_tools.hpp"
 
 
 ClockService::ClockService(DialMixerInterface& mixer) : DigitsService(mixer) {

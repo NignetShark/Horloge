@@ -2,11 +2,11 @@
 // Created by paul on 17/02/2021.
 //
 
-#ifndef HORLOGE_PINGPONGARRAY_HPP
-#define HORLOGE_PINGPONGARRAY_HPP
+#ifndef HORLOGE_PING_PONG_ARRAY_HPP
+#define HORLOGE_PING_PONG_ARRAY_HPP
 
 #include <mutex>
-#include "ledcolor.hpp"
+#include "led_color.hpp"
 #include "settings.hpp"
 
 /**
@@ -56,4 +56,4 @@ template class PingPongArray<color_t, DIAL_COUNT>;
 template class PingPongArray<uint8_t, DIAL_COUNT>;
 
 
-#endif //HORLOGE_PINGPONGARRAY_HPP
+#endif //HORLOGE_PING_PONG_ARRAY_HPP

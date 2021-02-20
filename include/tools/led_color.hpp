@@ -2,8 +2,8 @@
 // Created by paul on 17/02/2021.
 //
 
-#ifndef HORLOGE_LEDCOLOR_HPP
-#define HORLOGE_LEDCOLOR_HPP
+#ifndef HORLOGE_LED_COLOR_HPP
+#define HORLOGE_LED_COLOR_HPP
 
 #include "ws2811.h"
 #include <cstdint>
@@ -52,4 +52,4 @@ namespace led_color {
     color_t from_HSV(float h, float s, float v);
 }
 
-#endif //HORLOGE_LEDCOLOR_HPP
+#endif //HORLOGE_LED_COLOR_HPP

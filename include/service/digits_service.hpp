@@ -11,7 +11,7 @@
 #include <mutex>
 #include <service/dial_mixer_interface.hpp>
 #include "tools/settings.hpp"
-#include "tools/pingpongarray.hpp"
+#include "tools/ping_pong_array.hpp"
 
 /**
  * Abstract class of any process that use digits

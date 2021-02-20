@@ -5,9 +5,9 @@
 #ifndef HORLOGE_DIAL_MIXER_INTERFACE_HPP
 #define HORLOGE_DIAL_MIXER_INTERFACE_HPP
 
-#include "tools/ledcolor.hpp"
+#include "tools/led_color.hpp"
 #include "tools/settings.hpp"
-#include "tools/pingpongarray.hpp"
+#include "tools/ping_pong_array.hpp"
 
 /**
  * Interface used by process that use DialMixer

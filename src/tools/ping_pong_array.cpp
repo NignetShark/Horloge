@@ -3,7 +3,7 @@
 //
 
 #include <cstring>
-#include "tools/pingpongarray.hpp"
+#include "tools/ping_pong_array.hpp"
 
 template<class T, int size>
 PingPongArray<T, size>::PingPongArray() {

@@ -2,8 +2,8 @@
 // Created by paul on 17/02/2021.
 //
 
-#ifndef HORLOGE_TIMETOOLS_HPP
-#define HORLOGE_TIMETOOLS_HPP
+#ifndef HORLOGE_TIME_TOOLS_HPP
+#define HORLOGE_TIME_TOOLS_HPP
 
 #include <ctime>
 #include <cstdint>
@@ -50,4 +50,4 @@ public:
 };
 
 
-#endif //HORLOGE_TIMETOOLS_HPP
+#endif //HORLOGE_TIME_TOOLS_HPP

@@ -6,7 +6,7 @@
 #define HORLOGE_COLORATION_SERVICE_HPP
 
 #include <tools/selector.hpp>
-#include "tools/pingpongarray.hpp"
+#include "tools/ping_pong_array.hpp"
 #include "tools/settings.hpp"
 #include <service/async_service.hpp>
 #include <service/dial_mixer_interface.hpp>

@@ -2,7 +2,7 @@
 // Created by paul on 17/02/2021.
 //
 
-#include "tools/timetools.hpp"
+#include "tools/time_tools.hpp"
 
 void TimeTools::time2digits(uint8_t *result, time_t time) {
     tm* time_tm = localtime(&time);
