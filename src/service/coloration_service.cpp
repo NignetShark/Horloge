@@ -32,4 +32,3 @@ void ColorationService::set_night_mode() {
 
 
 
-

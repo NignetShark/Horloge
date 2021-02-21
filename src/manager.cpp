@@ -8,12 +8,15 @@
 
 Manager* Manager::instance;
 
-Manager::Manager(Display &display) : display(display), anim_service(), ntp_service(anim_service), scheduler() {
+Manager::Manager(Display &display) : display(display), anim_service(), ntp_service(anim_service), scheduler(), terminal_input() {
     instance = this;
 
     dial_mixer = new DialMixer();
     dial_coloration = new DialColoration(*dial_mixer);
     clock_service = new ClockService(*dial_mixer);
+    terminal_input.append(ColorInputInterface::command_call, "color");
+    terminal_input.append(ColorInputInterface::command_call, "c");
+    terminal_input.start();
 }
 
 Manager * Manager::create(Display &display) {

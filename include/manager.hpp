@@ -11,6 +11,7 @@
 #include <service/animation_service.hpp>
 #include <service/ntp/ntp_service.hpp>
 #include <service/scheduler/scheduler.hpp>
+#include <input/terminal_input.hpp>
 #include "display/display.hpp"
 
 /**
@@ -30,6 +31,7 @@ private:
     ClockService* clock_service;
 
     Scheduler scheduler;
+    TerminalInput terminal_input;
 
     /**
      * Current base service
