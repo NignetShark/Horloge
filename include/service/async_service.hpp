@@ -25,7 +25,7 @@ protected:
     /**
      * true = service running
      */
-    bool keepAlive = false;
+    bool keep_alive = false;
 
 public:
     void _start() override;

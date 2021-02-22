@@ -47,7 +47,7 @@ void TerminalInput::run() {
 }
 
 void TerminalInput::append(input_handler_t function, const std::string& command) {
-    if(keepAlive) throw FatalException("Cannot add a command while running");
+    if(keep_alive) throw FatalException("Cannot add a command while running");
     commands[command] = function;
 }
 

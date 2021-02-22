@@ -6,22 +6,22 @@
 #include "service/async_service.hpp"
 
 void AsyncService::_start() {
-    if(keepAlive) throw FatalException("Service already running.");
-    keepAlive = true;
+    if(keep_alive) throw FatalException("Service already running.");
+    keep_alive = true;
     service_thread = std::move(std::thread(&AsyncService::run, this));
 }
 
 void AsyncService::_start_sync() {
-    if(keepAlive) throw FatalException("Service already running.");
-    keepAlive = true;
+    if(keep_alive) throw FatalException("Service already running.");
+    keep_alive = true;
     run();
-    keepAlive = false;
+    keep_alive = false;
 }
 
 
 void AsyncService::_stop() {
-    if(keepAlive) {
-        keepAlive = false;
+    if(keep_alive) {
+        keep_alive = false;
         service_thread.join();
     }
 }
@@ -31,7 +31,7 @@ void AsyncService::wait_ms(unsigned int delay) {
 }
 
 bool AsyncService::is_alive() const {
-    return keepAlive;
+    return keep_alive;
 }
 
 void AsyncService::wait_until(time_t date) {

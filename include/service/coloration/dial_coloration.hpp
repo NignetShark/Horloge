@@ -28,7 +28,8 @@ private:
     /*** GENERIC FUNCTIONS ***/
     void unicolor(color_t color);
     void unicolors(color_t *colors);
-    void movingRainbow(float *hueOffsets, uint16_t delay_ms, float increment = 1);
+    void moving_rainbow(float *hue_offsets, uint16_t delay_ms, float increment = 1);
+    void moving_restricted_rainbow(float* hue_offsets, float hue_max_increment, uint16_t delay_ms, float increment);
 
 public:
     DialColoration(DialMixerInterface& mixer);

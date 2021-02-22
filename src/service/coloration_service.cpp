@@ -9,7 +9,7 @@ ColorationService::ColorationService(size_t nb_modes, size_t default_mode) : Sel
 }
 
 void ColorationService::mode_changed() {
-    if(keepAlive) stop();
+    if(keep_alive) stop();
     start();
 }
 

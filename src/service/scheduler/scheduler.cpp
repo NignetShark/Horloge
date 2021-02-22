@@ -11,7 +11,7 @@ Scheduler::Scheduler() : mutex(), tasks() {
 }
 
 void Scheduler::run() {
-    while(!tasks.empty() && keepAlive) {
+    while(!tasks.empty() && keep_alive) {
         mutex.lock();
         time_t wake_up_date = tasks.begin()->first;
         TaskScheduled* task = tasks.begin()->second;

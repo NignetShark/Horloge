@@ -22,7 +22,7 @@ void ClockService::run() {
     uint8_t result[DIAL_COUNT];
     uint8_t* target = mixer.get_digit_array();
 
-    while (keepAlive) {
+    while (keep_alive) {
 
         time_t now = time(0);
         TimeTools::time2digits(target, now);
@@ -46,7 +46,7 @@ void ClockService::cascadeDigits(uint8_t* to_digits, unsigned int delay_ms) {
     uint8_t* prev = mixer.get_prev_digit_array(); // Used to get the last value
     uint8_t* target = mixer.get_digit_array();
 
-    while(!array_equals(target, to_digits, DIAL_COUNT) and keepAlive){
+    while(!array_equals(target, to_digits, DIAL_COUNT) and keep_alive){
 
         for(uint8_t i = 0; i < DIAL_COUNT; i++){
             if(prev[i] < to_digits[i]){
@@ -71,7 +71,7 @@ void ClockService::cascadeNumbersToTime(unsigned int delay_ms) {
     TimeTools::time2numbers(currentNum, time(0));
     TimeTools::digits2numbers(targetNum, target);
 
-    while(!array_equals(targetNum, currentNum, 3) and keepAlive){
+    while(!array_equals(targetNum, currentNum, 3) and keep_alive){
 
         wait_ms(delay_ms);
 
@@ -116,7 +116,7 @@ void ClockService::try_stop() {
 }
 
 bool ClockService::is_alive() {
-    return keepAlive;
+    return keep_alive;
 }
 
 

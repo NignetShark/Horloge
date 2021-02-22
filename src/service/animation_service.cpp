@@ -12,7 +12,7 @@ AnimationService::AnimationService()
 }
 
 void AnimationService::setup(Animator &animator, float increment, unsigned int delay) {
-    if(keepAlive) throw FatalException("Setup cannot cannot be used when the service is running");
+    if(keep_alive) throw FatalException("Setup cannot cannot be used when the service is running");
     this->animator = &animator;
     this->increment = increment;
     this->delay = delay;
@@ -37,7 +37,7 @@ void AnimationService::run() {
         display.load_state(prev_frame);
     }
 
-    while (keepAlive) {
+    while (keep_alive) {
         if(!animator->next_keyframe(next_frame, prev_frame)) break;
 
         // Animation part
@@ -59,7 +59,7 @@ void AnimationService::run() {
 
     display.save_state(&result);
     animator = nullptr;
-    keepAlive = false;
+    keep_alive = false;
 }
 
 
