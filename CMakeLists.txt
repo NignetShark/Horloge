@@ -3,6 +3,10 @@ project(Horloge)
 
 set(CMAKE_CXX_STANDARD 14)
 
+SET(CMAKE_SYSTEM_NAME Linux)
+SET(CMAKE_C_COMPILER /home/paul/.git/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc)
+SET(CMAKE_CXX_COMPILER /home/paul/.git/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-g++)
+
 add_executable(Horloge
         src/main.cpp
         src/tools/led_matrix.cpp
@@ -46,4 +50,4 @@ target_link_libraries(Horloge
         ws2811
         )
 
-target_link_directories(Horloge PRIVATE lib/ws281x)
+target_link_directories(Horloge PRIVATE lib/rpi_ws281x/cmake-build-debug)
