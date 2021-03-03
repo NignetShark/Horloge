@@ -3,9 +3,16 @@ project(Horloge)
 
 set(CMAKE_CXX_STANDARD 14)
 
-SET(CMAKE_SYSTEM_NAME Linux)
-SET(CMAKE_C_COMPILER /home/paul/.git/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc)
-SET(CMAKE_CXX_COMPILER /home/paul/.git/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-g++)
+set(COMPILER_PATH /home/paul/.git/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin)
+
+option(CROSS_COMPILE_BUILD "Use cross-compilation" ON)
+
+
+if(CROSS_COMPILE_BUILD)
+    SET(CMAKE_SYSTEM_NAME Linux)
+    SET(CMAKE_C_COMPILER ${COMPILER_PATH}/arm-linux-gnueabihf-gcc)
+    SET(CMAKE_CXX_COMPILER ${COMPILER_PATH}/arm-linux-gnueabihf-g++)
+endif(CROSS_COMPILE_BUILD)
 
 add_executable(Horloge
         src/main.cpp
@@ -39,15 +46,24 @@ add_executable(Horloge
         src/service/scheduler/scheduler.cpp
         src/service/scheduler/task_scheduled.cpp
         src/service/scheduler/day_night_task.cpp
-        src/tools/logging.cpp src/input/terminal_input.cpp include/input/terminal_input.hpp)
+        src/tools/logging.cpp src/input/terminal_input.cpp include/input/terminal_input.hpp src/service/network/network_watcher.cpp include/service/network/network_watcher.hpp)
 
 target_include_directories(Horloge PRIVATE
         include
-        lib/ws281x/include)
+        lib/rpi_ws281x)
 
 target_link_libraries(Horloge
         pthread
         ws2811
         )
 
-target_link_directories(Horloge PRIVATE lib/rpi_ws281x/cmake-build-debug)
+if(CROSS_COMPILE_BUILD)
+    target_link_directories(Horloge PRIVATE /usr/local/lib/cross-rpi)
+else()
+    target_link_directories(Horloge PRIVATE /usr/local/lib)
+endif()
+
+
+if(CROSS_COMPILE_BUILD)
+    add_custom_command(TARGET Horloge POST_BUILD COMMAND scp $<TARGET_FILE:Horloge> pi@192.168.1.12:~/)
+endif(CROSS_COMPILE_BUILD)

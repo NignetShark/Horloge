@@ -18,6 +18,7 @@ void DigitsService::reset() {
 
 void DigitsService::print_digits(uint8_t *digits) {
     for(int i = 0; i < DIAL_COUNT; i++) {
+        if(i % 2 == 0 and i > 0) std::cout << ":";
         std::cout << std::to_string(digits[i]);
     }
     std::cout << std::endl;

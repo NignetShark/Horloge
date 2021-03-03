@@ -26,25 +26,25 @@ void ClockService::run() {
 
         time_t now = time(0);
         TimeTools::time2digits(target, now);
-        target = mixer.paint_digits();
 
         // Go back to 0 animation.
         if(target[5] == 9) {
-            wait_ms(200);
+            mixer.paint_digits();
+            wait_ms(500);
 
             TimeTools::time2digits(result, now + 1);
             cascadeDigits(result, 50);
-
-            target = mixer.get_digit_array();
         }
+
+        target = mixer.paint_digits();
 
         wait_until_next_sec();
     }
 }
 
 void ClockService::cascadeDigits(uint8_t* to_digits, unsigned int delay_ms) {
-    uint8_t* prev = mixer.get_prev_digit_array(); // Used to get the last value
-    uint8_t* target = mixer.get_digit_array();
+    uint8_t* prev = mixer.get_digit_array(); // Used to get the last value
+    uint8_t* target = prev;
 
     while(!array_equals(target, to_digits, DIAL_COUNT) and keep_alive){
 

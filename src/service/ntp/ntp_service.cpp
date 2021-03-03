@@ -61,6 +61,11 @@ void NTPService::run() {
 
     if(ok) {
         Logging::get().info("NTP date : " + TimeTools::time2str(txTm));
+        if(set_date(txTm)) {
+            Logging::get().write("System time updated successfully");
+        } else {
+            Logging::get().warning("Fail to update system time (Do I have root privileges ?)");
+        }
         success();
     } else {
         Logging::get().error("NTP synchronization failed");
@@ -239,6 +244,11 @@ void NTPService::success() {
     anim_service.start();
     wait_ms(5000);
     anim_service.stop();
+}
+
+bool NTPService::set_date(time_t time) {
+    std::string cmd = "date -s @" + std::to_string(time);
+    return system(cmd.c_str()) == 0;
 }
 
 

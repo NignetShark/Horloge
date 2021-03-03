@@ -44,6 +44,12 @@ private:
      */
     time_t get_NTP_Time();
 
+    /**
+     * Set the system time
+     * @param time in Unix format
+     */
+     static bool set_date(time_t time);
+
 public:
     NTPService(AnimationService& anim_service);
 

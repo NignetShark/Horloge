@@ -70,6 +70,7 @@ public:
     void start_animation();
     void start_ntp();
     void start_scheduler();
+    void read_input();
 
     ColorInputInterface* get_color_input();
 

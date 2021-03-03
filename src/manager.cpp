@@ -16,7 +16,6 @@ Manager::Manager(Display &display) : display(display), anim_service(), ntp_servi
     clock_service = new ClockService(*dial_mixer);
     terminal_input.append(ColorInputInterface::command_call, "color");
     terminal_input.append(ColorInputInterface::command_call, "c");
-    terminal_input.start();
 }
 
 Manager * Manager::create(Display &display) {
@@ -76,6 +75,10 @@ ColorInputInterface *Manager::get_color_input() {
     } else {
         return nullptr;
     }
+}
+
+void Manager::read_input() {
+    terminal_input.start_sync();
 }
 
 

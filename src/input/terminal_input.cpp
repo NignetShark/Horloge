@@ -15,6 +15,7 @@ TerminalInput::TerminalInput() {
 
 void TerminalInput::read_stdin() {
     for(std::string line; getline(std::cin, line);){
+        if(line.empty()) continue;
         std::vector<std::string> splited = split(line, " ");
         auto iter = commands.find(splited[0]);
         if(iter == commands.end()) {

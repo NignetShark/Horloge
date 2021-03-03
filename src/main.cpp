@@ -4,12 +4,13 @@
 #include <manager.hpp>
 #include <display/nixie_display.hpp>
 #include <service/scheduler/day_night_task.hpp>
+#include <service/network/network_watcher.hpp>
 
 
 int main() {
     /* Select a display */
-    //NixieDisplay display;
-    TerminalDisplay display;
+    NixieDisplay display;
+    //TerminalDisplay display;
 
     Manager* manager = Manager::create(display); // Create the manager
 
@@ -29,14 +30,19 @@ int main() {
     manager->start_scheduler();
 
 
+    NetworkWatcher networkWatcher;
+    networkWatcher.start();
     Manager::get().start_ntp();
 
-    Manager::get().start_animation();
+    //Manager::get().start_animation();
 
 
     manager->start_clock();
 
-    std::this_thread::sleep_for(std::chrono::seconds(25));
+
+
+    manager->read_input();
+    //std::this_thread::sleep_for(std::chrono::seconds(25));
 
     return 0;
 }
